@@ -12,8 +12,17 @@ namespace GameEngine
 		{
 			None = -1,
 
-			AddYourTexturesEnumerationsHere, // Replace this for your own enumerations
-
+			Basic_Projectile = 0,
+			Bomb_Projectile = 1,
+			Crate_Bomb = 2,
+			Crate_Laser = 3,
+			Crate_Machine_Gun = 4,
+			Create_Rocket = 5,
+			Rocket_Projectile = 6,
+			Tank_Blue = 7,
+			Tank_Green = 8,
+			Tank_Red = 9,
+			Tank_Yellow = 10,
 			Count,
 		};
 	}	
