@@ -9,7 +9,7 @@ using namespace GameEngine;
 using namespace std;
 
 PlayerMovementComponent::PlayerMovementComponent() {
-	movementSpeed = 100.f;
+	movementSpeed = 150.f;
 	rotateSpeed = 120.f;
 	whatKeyBinding = 1;
 }
@@ -37,7 +37,7 @@ void PlayerMovementComponent::Update() {
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-			movementVector += sf::Vector2f(cos((GetEntity()->GetRot() + 90) * M_PI / 180.f), sin((GetEntity()->GetRot() + 90) * M_PI / 180.f));
+			movementVector += sf::Vector2f(cos((GetEntity()->GetRot() + 90) * M_PI / 180.f)*0.5, sin((GetEntity()->GetRot() + 90) * M_PI / 180.f)*0.5);
 		}
 
 		GetEntity()->SetPos(GetEntity()->GetPos() + movementVector * movementSpeed * GameEngine::GameEngineMain::GetTimeDelta());
