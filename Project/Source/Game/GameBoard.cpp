@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "GameEngine/GameEngineMain.h"
 #include "GameEngine/Util/TextureManager.h"
+#include <cstdlib>
 
 
 
@@ -11,6 +12,7 @@ GameBoard* GameBoard::m_gameboard = nullptr;
 
 GameBoard::GameBoard()
 {
+	CreateBackground();
 	CreatePlayer();
 	widthPx = GameEngine::GameEngineMain::GetWinWidth();
 	heightPx = GameEngine::GameEngineMain::GetWinHeight();
@@ -46,6 +48,18 @@ bool GameBoard::IsGameOver() {
 	return false;
 }
 
+void GameBoard::CreateBackground() {
+	GameEngine::Entity* background = new GameEngine::Entity();
+	GameEngine::GameEngineMain::GetInstance()->AddEntity(background);
+
+	background->SetPos(sf::Vector2f(640, 360));
+	background->SetSize(sf::Vector2f(1280, 720));
+
+	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(background->AddComponent<GameEngine::SpriteRenderComponent>());
+	render->SetTexture(GameEngine::eTexture::Background);
+	render->SetFillColor(sf::Color::Transparent);
+}
+
 void GameBoard::CreatePlayer() 
 {
 	GameEngine::eTexture::type sprite1 = GameEngine::eTexture::type::Tank_Red;
@@ -75,7 +89,10 @@ std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 
 void GameBoard::populateWalls() {
 	//1:wall 0:no wall
-	//boundaries
+
+	std::vector<Wall*> map;
+
+	// create borders
 	for (int i = 0; i < numX; i++) {
 		if (i == 0 || i == numX - 1) {
 			for (int j = 0; j < numY; j++) {
@@ -83,18 +100,19 @@ void GameBoard::populateWalls() {
 			}
 		}
 	}
-
 	for (int i = 0; i < numX; i++) {
 		for (int j = 0; j < numY; j++) {
-			if (j == 0 || j == numY - 1) {
-				wallGrid[i][j] = 1;
+			if (j == 0 || j == numY-1) {
+			wallGrid[i][j] = 1;
 			}
 		}
 	}
 
-	std::vector<Wall*> map;
+	// Create Walls
+	for (int i = 0; i < 30; i++) {
+		wallGrid = ProceduralWallGeneration(wallGrid);
+	}
 
-	// wall spawning
 	for (int i = 0; i < numX; i++) {
 		for (int j = 0; j < numY; j++) {
 			if (wallGrid[i][j] == 1) {
@@ -103,7 +121,39 @@ void GameBoard::populateWalls() {
 			}
 		}
 	}
+}
 
+std::vector<std::vector<int>> GameBoard::ProceduralWallGeneration(std::vector<std::vector<int>> grid) {
+
+	int currentX = rand() % (numX-6) + 6;
+	int currentY = rand() % (numY-6) + 6;
+	int randomDirection = 0;
+	int lastDirection = 0;
+	int minPathLength = 5;
+	sf::Vector2f newPos = sf::Vector2f(0,0);
+	sf::Vector2f currentPos = sf::Vector2f(currentX, currentY);
+	std::vector<std::vector<int>> directions =	{ {0,-1}, {0,1}, {-1,0}, {1, 0} };
+	
+	grid[currentX][currentY] = 1;
+
+	for (int i = 0; i < 4; i++) {
+		
+		randomDirection = rand() % 4;
+		lastDirection = randomDirection;
+		for (int i = 0; i < minPathLength; i++) {
+			newPos = sf::Vector2f(directions[randomDirection][0], directions[randomDirection][1]);
+			if (currentPos.x + newPos.x > 0 && currentPos.x + newPos.x < numX - 1 && currentPos.y + newPos.y > 0 && currentPos.y + newPos.y < numY - 1) {
+				currentPos += newPos;
+				grid[currentPos.x][currentPos.y] = 1;
+			}
+			else {
+				while (lastDirection == randomDirection) {
+					randomDirection = rand() % 4;
+				}
+			}
+		}
+	}
+	return grid;
 }
 
 Wall* GameBoard::CreateWall(int i, int j) {

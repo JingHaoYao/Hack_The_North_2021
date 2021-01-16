@@ -24,9 +24,11 @@ namespace Game
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
 		std::vector<Game::Player*> GetAllPlayers();
 		Wall* CreateWall(int, int);
+		std::vector<std::vector<int>> ProceduralWallGeneration(std::vector<std::vector<int>>);
 
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;
+		void CreateBackground();
 		void CreatePlayer();
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;

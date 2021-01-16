@@ -12,13 +12,10 @@ Wall::Wall(int x, int y, GameEngine::eTexture::type eTexture) {
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
     spriteRenderComponent->SetTexture(eTexture);
-    spriteRenderComponent->SetFillColor(sf::Color(200, 200, 200, 255));
+    spriteRenderComponent->SetFillColor(sf::Color(0, 0, 0, 225));
 
     // Collisions
     collidableComponent = AddComponent<GameEngine::CollidableComponent>();
-
-    // Sounds
-    soundComponent = AddComponent<GameEngine::SoundComponent>();
 
     m_layer = GameEngine::CollisionLayer::Wall;
 }
