@@ -26,8 +26,9 @@ namespace Game {
         Player(GameEngine::eTexture::type, int);
         ~Player();
         
-        Projectile* GetCurrentProjectile();
-        void SetCurrentProjectile(Projectile*);
+        std::vector<Projectile*> GetCurrentProjectiles();
+        void AddCurrentProjectile(Projectile*);
+        void RemoveProjectile(Projectile*);
         void PlayerDied(); //pepesad
         void SetPlayerUpgrade(PlayerUpgrade);
         PlayerUpgrade GetPlayerUpgrade();
@@ -38,7 +39,7 @@ namespace Game {
         GameEngine::SoundComponent* soundComponent;
         GameEngine::PlayerMovementComponent* playerMovementComponent;
         GameEngine::PlayerShootComponent* playerShootComponent;
-        Projectile* currentProjectile;
+        std::vector<Projectile*> currentProjectiles;
         PlayerUpgrade currentPlayerUpgrade;
         int playerNumber;
 

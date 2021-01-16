@@ -20,7 +20,6 @@ void PlayerProjectileCollisionComponent::OnAddToWorld()
 	CollidableComponent::OnAddToWorld();
 }
 
-
 void PlayerProjectileCollisionComponent::OnRemoveFromWorld()
 {
 	CollidableComponent::OnRemoveFromWorld();
@@ -41,37 +40,40 @@ void PlayerProjectileCollisionComponent::Update()
 		AABBRect intersection;
 		AABBRect myBox = GetWorldAABB();
 		AABBRect colideBox = colComponent->GetWorldAABB();
+		
+		std::vector<CollidableComponent*> intersectedComponents;
+
 		if (myBox.intersects(colideBox, intersection))
 		{
+			intersectedComponents.push_back(colComponent);
+
 			if (colComponent->GetEntity()->GetLayer() == CollisionLayer::Wall) {
 				// need to find which side of the wall it crashes with.
 				sf::Vector2f pos = GetEntity()->GetPos();
 				float boundedAngle = fmod(currentAngleTravel + 360, 360);
-
 				if (intersection.width < intersection.height)
 				{
+					// reflect across Y-axis
+					SetCurrentAngleTravel(fmod(180 - boundedAngle + 360, 360));
 					if (myBox.left < colideBox.left)
 						pos.x -= intersection.width;
 					else
 						pos.x += intersection.width;
-
-					// reflect across Y-axis
-					SetCurrentAngleTravel(fmod(180 - boundedAngle + 360, 360));
 				}
 				else
 				{
+					// reflect across X-axis
+					SetCurrentAngleTravel(fmod(-boundedAngle + 360, 360));
 					if (myBox.top < colideBox.top)
 						pos.y -= intersection.height;
 					else
 						pos.y += intersection.height;
-
-					// reflect across X-axis
-					SetCurrentAngleTravel(fmod(-boundedAngle + 360, 360));
 				}
-
 				GetEntity()->SetPos(pos);
+				break;
 			}
 		}
+		
 	}
 }
 

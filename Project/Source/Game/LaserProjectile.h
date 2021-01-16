@@ -11,8 +11,5 @@ namespace Game {
 		void OnAddToWorld() override;
 
 		void Update() override;
-
-	protected:
-		GameEngine::AnimationComponent* animator;
 	};
 }

@@ -32,8 +32,8 @@ void AnimationManager::InitStaticGameAnimations()
 	m_animDefinitions.push_back
 	(
 		SAnimationDefinition(
-			EAnimationId::Laser_Projectile,
-			eTexture::Laser_Projectile,
+			EAnimationId::Bomb_Blink,
+			eTexture::Bomb_Blink,
 			sf::Vector2i(0, 0),
 			6,
 			12)

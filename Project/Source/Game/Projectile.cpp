@@ -45,7 +45,7 @@ void Projectile::Update() {
     // Duration
     if (GetTimeElapsed() >= GetDuration()) {
         GameEngine::GameEngineMain::GetInstance()->RemoveEntity(this);
-        Game::GameBoard::getInstance()->GetPlayerByIndex(GetPlayerIndex())->SetCurrentProjectile(NULL);
+        Game::GameBoard::getInstance()->GetPlayerByIndex(GetPlayerIndex())->RemoveProjectile(this);
     }
     else {
         SetTimeElapsed(GetTimeElapsed() + GameEngine::GameEngineMain::GetTimeDelta());

@@ -71,28 +71,41 @@ void PlayerCollisionComponent::Update()
 
 			}
 			else if (colComponent->GetEntity()->GetLayer() == CollisionLayer::PlayerProjectile) {
-				if (Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile() == colComponent->GetEntity()) {
-					if (!Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile()->HasLeftPlayerHitbox()) {
+				std::vector<Game::Projectile*> allProjectiles = Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectiles();
+
+				auto foundIterator = std::find(allProjectiles.begin(), allProjectiles.end(), colComponent->GetEntity());
+
+				if (foundIterator != allProjectiles.end()) {
+					if (!(*foundIterator)->HasLeftPlayerHitbox()) {
 						continue;
 					}
 				}
 
 				// player hit
 
-				Entity* projectileEntity = colComponent->GetEntity();
 				for each (auto var in Game::GameBoard::getInstance()->GetAllPlayers())
 				{
-					if (var->GetCurrentProjectile() == projectileEntity) {
-						var->SetCurrentProjectile(NULL);
+					std::vector<Game::Projectile*> playerCurrentProjectiles = var->GetCurrentProjectiles();
+					auto it = std::find(playerCurrentProjectiles.begin(), playerCurrentProjectiles.end(), colComponent->GetEntity());
+					if (it != playerCurrentProjectiles.end()) {
+						var->RemoveProjectile(*it);
 					}
 				}
-				GameEngine::GameEngineMain::GetInstance()->RemoveEntity(projectileEntity);
+
+				GameEngine::GameEngineMain::GetInstance()->RemoveEntity(colComponent->GetEntity());
 				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->PlayerDied();
 			}
 		}
 		else {
-			if (Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile() == colComponent->GetEntity()) {
-				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile()->FlagPlayerHitbox();
+			std::vector<Game::Projectile*> allProjectiles = Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectiles();
+
+			auto foundIterator = std::find(
+				allProjectiles.begin(),
+				allProjectiles.end(),
+				colComponent->GetEntity());
+
+			if (foundIterator != allProjectiles.end()) {
+				(*foundIterator)->FlagPlayerHitbox();
 				// TODO: Check for if the collider is the player projectile, so we can set a flag to it that says it left the hitbox of the player.
 			}
 		}

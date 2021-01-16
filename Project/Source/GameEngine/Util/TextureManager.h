@@ -27,6 +27,7 @@ namespace GameEngine
 			Transparent_Wall = 13,
 			Laser_Projectile = 14,
 			Background = 15,
+			Bomb_Blink = 16,
 			Count,
 		};
 	}	
@@ -50,6 +51,7 @@ namespace GameEngine
 			case eTexture::Transparent_Wall: return "transparent_wall.png";
 			case eTexture::Laser_Projectile: return "laser_projectile.png";
 			case eTexture::Background: return "Background.png";
+			case eTexture::Bomb_Blink: return "bomb_blink.png";
 		}
 		return "UnknownTexType";
 	}

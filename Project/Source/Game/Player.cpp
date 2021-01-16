@@ -32,7 +32,7 @@ Player::Player(GameEngine::eTexture::type eTexture, int binding) {
 }
 
 Player::~Player() {
-    delete currentProjectile;
+    
 }
 
 void Player::Update() {
@@ -41,12 +41,17 @@ void Player::Update() {
     collidableComponent->Update();
 }
 
-Projectile* Player::GetCurrentProjectile() {
-    return currentProjectile;
+std::vector<Projectile*> Player::GetCurrentProjectiles() {
+    return currentProjectiles;
 }
 
-void Player::SetCurrentProjectile(Projectile* p) {
-    currentProjectile = p;
+void Player::AddCurrentProjectile(Projectile* p) {
+    currentProjectiles.push_back(p);
+}
+
+void Player::RemoveProjectile(Projectile* p) {
+    auto it = std::find(currentProjectiles.begin(), currentProjectiles.end(), p);
+    currentProjectiles.erase(it);
 }
 
 void Player::PlayerDied() {

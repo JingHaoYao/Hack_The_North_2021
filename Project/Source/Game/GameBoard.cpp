@@ -168,7 +168,7 @@ Wall* GameBoard::CreateWall(int i, int j) {
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newWall);
 
 	newWall->SetPos(sf::Vector2f(newWall->GetPosX(), newWall->GetPosY()));
-	newWall->SetSize(sf::Vector2f(16.f, 16.f));
+	newWall->SetSize(sf::Vector2f(18.f, 18.f));
 
 	return newWall;
 }

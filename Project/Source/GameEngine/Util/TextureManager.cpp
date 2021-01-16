@@ -47,11 +47,9 @@ namespace TextureHelper
 {
 	sf::Vector2f GetTextureTileSize(GameEngine::eTexture::type texture)
 	{
-		switch(texture) {
+		switch (texture) {
 		case GameEngine::eTexture::Explosion_0:
 			return sf::Vector2f(48.f, 48.f);
-		case GameEngine::eTexture::Laser_Projectile:
-			return sf::Vector2f(20.f, 50.f);
 		}
 
 		return sf::Vector2f(-1.f, -1.f);
