@@ -2,8 +2,12 @@
 
 using namespace Game;
 
-Wall::Wall() {
+Wall::Wall(int x, int y) {
     Wall::SetLayer(GameEngine::CollisionLayer::Player);
+
+    // Variables
+    posX = x;
+    posY = y;
 
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
@@ -17,4 +21,20 @@ Wall::Wall() {
 }
 
 Wall::~Wall() {
+}
+
+int Wall::GetPosX() {
+    return posX;
+}
+
+void Wall::SetPosX(int x) {
+    posX = x;
+}
+
+int Wall::GetPosY() {
+    return posY;
+}
+
+void Wall::SetPosY(int y) {
+    posY = y;
 }
