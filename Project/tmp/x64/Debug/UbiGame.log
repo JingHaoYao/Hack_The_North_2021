@@ -1,27 +1,18 @@
-﻿  TextRenderComponent.cpp
-  CameraManager.cpp
-  ParticleComponent.cpp
-  ParticleEmitterComponent.cpp
-  SoundComponent.cpp
-  AnimationManager.cpp
-  AnimationComponent.cpp
-  CollidablePhysicsComponent.cpp
-  CollidableComponent.cpp
-  CollisionManager.cpp
-  SoundManager.cpp
-D:\GitHub\Hack_The_North_2021\Project\Source\GameEngine\Util\SoundManager.cpp(122,9): warning C4834: discarding return value of function with 'nodiscard' attribute
-  GameBoard.cpp
-  RenderComponent.cpp
-  Component.cpp
-  main.cpp
-  Entity.cpp
-  GameEngineMain.cpp
-  TextureManager.cpp
-  SpriteRenderComponent.cpp
-  Generating Code...
+﻿  GameEngineMain.cpp
   UbiGame.vcxproj -> D:\GitHub\Hack_The_North_2021\Project\bin\x64\Debug\UbiGame.exe
   D:\GitHub\Hack_The_North_2021\Project\Resources\PLACE_YOUR_RESOURCES_HERE
-  1 File(s) copied
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\basic_projectile.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\bomb_projectile.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\crate_bomb.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\crate_laser.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\crate_machine_gun.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\crate_rocket.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\rocket_projectile.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\tank_blue.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\tank_green.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\tank_red.png
+  D:\GitHub\Hack_The_North_2021\Project\Resources\img\tank_yellow.png
+  12 File(s) copied
   D:\GitHub\Hack_The_North_2021\Project\..\SFML-2.5.0\bin\openal32.dll
   D:\GitHub\Hack_The_North_2021\Project\..\SFML-2.5.0\bin\sfml-audio-2.dll
   D:\GitHub\Hack_The_North_2021\Project\..\SFML-2.5.0\bin\sfml-audio-d-2.dll
