@@ -21,7 +21,6 @@ namespace Game {
         int posY;
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
         GameEngine::CollidableComponent* collidableComponent;
-        GameEngine::SoundComponent* soundComponent;
     };
 
 }
