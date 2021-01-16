@@ -11,7 +11,6 @@ namespace Game {
     class Projectile : public GameEngine::Entity
     {
     public:
-        Projectile(GameEngine::eTexture::type);
         Projectile();
         ~Projectile();
 
@@ -27,7 +26,6 @@ namespace Game {
         void SetPlayerIndex(int);
 
     protected:
-        int keybinding;
         float projectileSpeed;
         float angleOfTravel;
         float duration;

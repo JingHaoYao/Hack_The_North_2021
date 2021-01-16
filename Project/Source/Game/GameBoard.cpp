@@ -2,9 +2,8 @@
 #include "Player.h"
 #include "GameEngine/GameEngineMain.h"
 #include "GameEngine/Util/TextureManager.h"
+#include "Game/PowerUpCrate.h"
 #include <cstdlib>
-
-
 
 using namespace Game;
 
@@ -24,6 +23,7 @@ GameBoard::GameBoard()
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
 	populateWalls();
+	CreateUpgradeCrate(PlayerUpgrade::Laser, sf::Vector2f(200.f, 200.f));
 }
 GameBoard::~GameBoard()
 {
@@ -33,6 +33,11 @@ GameBoard::~GameBoard()
 void GameBoard::Update()
 {	
 	
+}
+
+void GameBoard::CreateUpgradeCrate(PlayerUpgrade u, sf::Vector2f p) {
+	PowerUpCrate* newCrate = new PowerUpCrate(u, p);
+	GameEngine::GameEngineMain::GetInstance()->AddEntity(newCrate);
 }
 
 sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {

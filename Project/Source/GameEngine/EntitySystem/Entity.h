@@ -8,7 +8,8 @@ namespace GameEngine
 	enum CollisionLayer {
 		Player,
 		PlayerProjectile,
-		Wall
+		Wall,
+		Upgrade
 	};
 
 	class Entity

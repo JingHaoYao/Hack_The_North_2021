@@ -10,11 +10,11 @@
 
 namespace Game {
     enum PlayerUpgrade {
-        None,
-        Rocket,
-        Bomb,
-        Laser,
-        MachineGun,
+        None = 0,
+        Rocket = 1,
+        Bomb = 2,
+        Laser = 3,
+        MachineGun = 4,
         Count
     };
 

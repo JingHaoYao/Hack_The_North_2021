@@ -6,41 +6,20 @@
 
 using namespace Game;
 
-Projectile::Projectile(GameEngine::eTexture::type eTexture) {
-
-    // Variables
-    keybinding = 0;
-    projectileSpeed = 200.f;
-    angleOfTravel = 0.f;
-    duration = 5.f;
-    timeElapsed = 0.f;
-
-    // Render
-    spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
-    spriteRenderComponent->SetTexture(eTexture);
-    spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
-
-    // Collisions
-    collidableComponent = AddComponent<GameEngine::PlayerProjectileCollisionComponent>();
-
-    // Sounds
-    soundComponent = AddComponent<GameEngine::SoundComponent>();
-
-    m_layer = GameEngine::CollisionLayer::PlayerProjectile; // set layer
-}
-
 Projectile::Projectile() {
+
     // Variables
-    keybinding = 0;
     projectileSpeed = 200.f;
     angleOfTravel = 0.f;
     duration = 5.f;
     timeElapsed = 0.f;
+    playerIndex = 0;
 
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
     spriteRenderComponent->SetTexture(GameEngine::eTexture::Basic_Projectile);
     spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
+    SetSize(sf::Vector2f(20, 20));
 
     // Collisions
     collidableComponent = AddComponent<GameEngine::PlayerProjectileCollisionComponent>();
@@ -61,6 +40,7 @@ void Projectile::Update() {
 
     sf::Vector2f projectileVector = sf::Vector2f(cos(GetAngleOfTravel() * M_PI / 180.f), (sin(GetAngleOfTravel() * M_PI / 180.f)));
     SetPos(GetPos() + projectileVector * projectileSpeed * GameEngine::GameEngineMain::GetTimeDelta());
+    SetRotation(angleOfTravel - 90);
 
     // Duration
     if (GetTimeElapsed() >= GetDuration()) {
