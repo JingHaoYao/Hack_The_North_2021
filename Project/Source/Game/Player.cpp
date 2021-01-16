@@ -15,7 +15,8 @@ Player::Player(GameEngine::eTexture::type eTexture, int binding) {
     spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
 
     // Collisions
-    collidableComponent = AddComponent<GameEngine::CollidableComponent>();
+    collidableComponent = AddComponent<GameEngine::PlayerCollisionComponent>();
+    collidableComponent->SetPlayerIndex(binding);
 
     // Sounds
     soundComponent = AddComponent<GameEngine::SoundComponent>();

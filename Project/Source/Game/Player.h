@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngine/EntitySystem/Entity.h"
 #include "GameEngine/EntitySystem/Components/SpriteRenderComponent.h"
-#include "GameEngine/EntitySystem/Components/CollidableComponent.h"
+#include "GameEngine/EntitySystem/Components/PlayerCollisionComponent.h"
 #include "GameEngine/EntitySystem/Components/SoundComponent.h"
 #include "GameEngine/EntitySystem/Components/PlayerMovementComponent.h"
 #include "GameEngine/EntitySystem/Components/PlayerShootComponent.h"
@@ -22,7 +22,7 @@ namespace Game {
 
     protected:
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
-        GameEngine::CollidableComponent* collidableComponent;
+        GameEngine::PlayerCollisionComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
         GameEngine::PlayerMovementComponent* playerMovementComponent;
         GameEngine::PlayerShootComponent* playerShootComponent;

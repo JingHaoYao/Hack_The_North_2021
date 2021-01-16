@@ -2,13 +2,14 @@
 #include "GameEngine/Util/CollisionManager.h"
 #include "GameEngine/EntitySystem/Entity.h"
 #include "GameEngine/GameEngineMain.h"
+#include "Game/GameBoard.h"
 #include <vector>
 
 using namespace GameEngine;
 
 PlayerCollisionComponent::PlayerCollisionComponent()
 {
-	playerInstant = NULL;
+	playerIndex = 0;
 }
 
 PlayerCollisionComponent::~PlayerCollisionComponent()
@@ -27,9 +28,9 @@ void PlayerCollisionComponent::OnRemoveFromWorld()
 	CollidableComponent::OnRemoveFromWorld();
 }
 
-void PlayerCollisionComponent::SetPlayerInstant(Game::Player* player) 
+void PlayerCollisionComponent::SetPlayerIndex(int i) 
 {
-	this->playerInstant = player;
+	playerIndex = i;
 }
 
 void PlayerCollisionComponent::Update()
@@ -70,13 +71,23 @@ void PlayerCollisionComponent::Update()
 
 			}
 			else if (colComponent->GetEntity()->GetLayer() == CollisionLayer::PlayerProjectile) {
-				// need to check if the entity is the same as the projectile the player just shot.
+				if (Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile() == colComponent->GetEntity()) {
+					if (!Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile()->HasLeftPlayerHitbox()) {
+						continue;
+					}
+				}
+
+				// player hit
 				GameEngine::GameEngineMain::GetInstance()->RemoveEntity(colComponent->GetEntity());
+				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->SetCurrentProjectile(NULL);
 				// TODO: run death procedure on player instant
 			}
 		}
 		else {
-			// TODO: Check for if the collider is the player projectile, so we can set a flag to it that says it left the hitbox of the player.
+			if (Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile() == colComponent->GetEntity()) {
+				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->GetCurrentProjectile()->FlagPlayerHitbox();
+				// TODO: Check for if the collider is the player projectile, so we can set a flag to it that says it left the hitbox of the player.
+			}
 		}
 	}
 }

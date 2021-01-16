@@ -34,21 +34,23 @@ void PlayerShootComponent::Update() {
 }
 
 void PlayerShootComponent::CreateProjectile() {
-    GameEngine::eTexture::type sprite = GameEngine::eTexture::type::Basic_Projectile;
-    Projectile* newProjectile = new Projectile(sprite);
     Game::Player* playerInstance = Game::GameBoard::getInstance()->GetPlayerByIndex(GetPlayerIndex());
-    playerInstance->SetCurrentProjectile(newProjectile);
-    GameEngine::GameEngineMain::GetInstance()->AddEntity(newProjectile);
+    if (playerInstance->GetCurrentProjectile() == NULL) {
+        GameEngine::eTexture::type sprite = GameEngine::eTexture::type::Basic_Projectile;
+        Projectile* newProjectile = new Projectile(sprite);
+        playerInstance->SetCurrentProjectile(newProjectile);
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(newProjectile);
 
-    sf::Vector2f playerPos = playerInstance->GetPos();
-    float playerRot = playerInstance->GetRot();
+        sf::Vector2f playerPos = playerInstance->GetPos();
+        float playerRot = playerInstance->GetRot();
 
-    newProjectile->SetAngleOfTravel(playerRot - 90.f);
-    shaftLength = 25.f;
-    sf::Vector2f projectileOffset = sf::Vector2f(shaftLength * cos(newProjectile->GetAngleOfTravel() * M_PI / 180.f), shaftLength * sin(newProjectile->GetAngleOfTravel() * M_PI / 180.f));
+        newProjectile->SetAngleOfTravel(playerRot - 90.f);
+        shaftLength = 25.f;
+        sf::Vector2f projectileOffset = sf::Vector2f(shaftLength * cos(newProjectile->GetAngleOfTravel() * M_PI / 180.f), shaftLength * sin(newProjectile->GetAngleOfTravel() * M_PI / 180.f));
 
-    newProjectile->SetPos(playerPos + projectileOffset);
-    newProjectile->SetSize(sf::Vector2f(13.f, 13.f));
+        newProjectile->SetPos(playerPos + projectileOffset);
+        newProjectile->SetSize(sf::Vector2f(13.f, 13.f));
+    }
 }
 
 void PlayerShootComponent::SetPlayerIndex(int i) {
