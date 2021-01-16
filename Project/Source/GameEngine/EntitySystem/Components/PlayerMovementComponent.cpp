@@ -20,7 +20,7 @@ PlayerMovementComponent::~PlayerMovementComponent() {
 
 void PlayerMovementComponent::Update() {
 	switch (whatKeyBinding) {
-	case 1: 
+	case 0: 
 		sf::Vector2f movementVector = sf::Vector2f(0.f, 0.f);
 		int angleOffset = 0;
 
@@ -45,4 +45,8 @@ void PlayerMovementComponent::Update() {
 
 		break;
 	}
+}
+
+void PlayerMovementComponent::SetKeyBinding(int binding) {
+	whatKeyBinding = binding;
 }

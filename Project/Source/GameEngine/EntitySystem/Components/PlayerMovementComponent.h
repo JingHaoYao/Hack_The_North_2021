@@ -11,6 +11,8 @@ namespace GameEngine
 
 		virtual void Update() override;
 
+		void SetKeyBinding(int);
+
 	private:
 		// Speed Definitions
 		float movementSpeed;

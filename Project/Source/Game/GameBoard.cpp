@@ -30,7 +30,7 @@ bool GameBoard::IsGameOver() {
 void GameBoard::CreatePlayer() 
 {
 	GameEngine::eTexture::type sprite = GameEngine::eTexture::type::Tank_Red;
-	Player* newPlayer = new Player(sprite);
+	Player* newPlayer = new Player(sprite, 0);
 	this->players.push_back(newPlayer);
 
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newPlayer);

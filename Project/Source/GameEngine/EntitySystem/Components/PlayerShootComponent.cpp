@@ -24,9 +24,12 @@ PlayerShootComponent::~PlayerShootComponent() {
 }
 
 void PlayerShootComponent::Update() {
-
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        CreateProjectile();
+    switch (keyBinding) {
+    case 0:
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+            CreateProjectile();
+        }
+        break;
     }
 }
 
@@ -53,4 +56,8 @@ void PlayerShootComponent::SetPlayerIndex(int i) {
 }
 int PlayerShootComponent::GetPlayerIndex() {
     return playerIndex;
+}
+
+void PlayerShootComponent::SetBinding(int binding) {
+    keyBinding = binding;
 }
