@@ -2,6 +2,7 @@
 #include "PlayerShootComponent.h"
 #include "Game/GameBoard.h"
 #include "Game/Projectile.h"
+#include "Game/LaserProjectile.h"
 #include "GameEngine/GameEngineMain.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <GameEngine\Util\TextureManager.h>
@@ -47,6 +48,9 @@ void PlayerShootComponent::CreateProjectile() {
         case PlayerUpgrade::None:
             newProjectile = new Projectile();
             break;
+        case PlayerUpgrade::Laser:
+            newProjectile = new LaserProjectile();
+            break;
         }
 
         playerInstance->SetCurrentProjectile(newProjectile);
@@ -60,7 +64,6 @@ void PlayerShootComponent::CreateProjectile() {
         sf::Vector2f projectileOffset = sf::Vector2f(shaftLength * cos(newProjectile->GetAngleOfTravel() * M_PI / 180.f), shaftLength * sin(newProjectile->GetAngleOfTravel() * M_PI / 180.f));
 
         newProjectile->SetPos(playerPos + projectileOffset);
-        newProjectile->SetSize(sf::Vector2f(13.f, 13.f));
         newProjectile->SetPlayerIndex(GetPlayerIndex());
     }
 }

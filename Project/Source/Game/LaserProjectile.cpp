@@ -1,10 +1,13 @@
 #include "LaserProjectile.h"
 
 Game::LaserProjectile::LaserProjectile() {
-	Game::Projectile::Projectile(GameEngine::eTexture::Laser_Projectile);
+
+    // Render
+    spriteRenderComponent->SetTexture(GameEngine::eTexture::Laser_Projectile);
 	animator = AddComponent<GameEngine::AnimationComponent>();
 	animator->SetIsLooping(true);
 	projectileSpeed = 1000.f;
+	SetSize(sf::Vector2f(20, 50));
 }
 
 Game::LaserProjectile::~LaserProjectile() {
@@ -13,5 +16,11 @@ Game::LaserProjectile::~LaserProjectile() {
 
 void Game::LaserProjectile::OnAddToWorld() {
 	animator->PlayAnim(GameEngine::EAnimationId::Laser_Projectile);
-	Game::Projectile::OnAddToWorld();
+	Entity::OnAddToWorld();
+}
+
+void Game::LaserProjectile::Update() {
+	Projectile::Update();
+	animator->Update();
+	spriteRenderComponent->Update();
 }

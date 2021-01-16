@@ -28,6 +28,7 @@ namespace Game
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;
 		void CreatePlayer();
+		void CreateUpgradeCrate(PlayerUpgrade, sf::Vector2f);
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
 		std::vector<std::vector<int>> wallGrid;
