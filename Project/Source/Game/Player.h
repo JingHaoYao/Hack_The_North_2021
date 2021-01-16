@@ -14,7 +14,7 @@ namespace Game {
     class Player : public GameEngine::Entity
     {
     public:
-        Player(GameEngine::eTexture::type);
+        Player(GameEngine::eTexture::type, int);
         ~Player();
         
         Projectile* GetCurrentProjectile();

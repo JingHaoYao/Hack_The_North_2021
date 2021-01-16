@@ -2,11 +2,12 @@
 
 using namespace Game;
 
-Player::Player(GameEngine::eTexture::type eTexture) {
+Player::Player(GameEngine::eTexture::type eTexture, int binding) {
     Player::SetLayer(GameEngine::CollisionLayer::Player);
 
     // Movement
     playerMovementComponent = AddComponent<GameEngine::PlayerMovementComponent>();
+    playerMovementComponent->SetKeyBinding(binding);
 
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
@@ -20,7 +21,8 @@ Player::Player(GameEngine::eTexture::type eTexture) {
     soundComponent = AddComponent<GameEngine::SoundComponent>();
 
     playerShootComponent = AddComponent<GameEngine::PlayerShootComponent>();
-    playerShootComponent->SetPlayerIndex(0);
+    playerShootComponent->SetPlayerIndex(binding);
+    playerShootComponent->SetBinding(binding);
 }
 
 Player::~Player() {

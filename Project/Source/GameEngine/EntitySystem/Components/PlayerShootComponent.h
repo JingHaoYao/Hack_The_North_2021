@@ -12,6 +12,7 @@ namespace GameEngine
         virtual void Update() override;
         void SetPlayerIndex(int);
         int GetPlayerIndex();
+        void SetBinding(int);
 
     protected:
         int keyBinding;
