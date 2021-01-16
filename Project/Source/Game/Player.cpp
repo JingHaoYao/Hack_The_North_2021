@@ -1,7 +1,6 @@
-#include <GameEngine\EntitySystem\Components\SpriteRenderComponent.h>
 #include "Player.h"
-using namespace Game;
 
+using namespace Game;
 
 Player::Player(GameEngine::eTexture::type eTexture) {
     Player::SetLayer(GameEngine::CollisionLayer::Player);
@@ -22,9 +21,17 @@ Player::Player(GameEngine::eTexture::type eTexture) {
 }
 
 Player::~Player() {
-
+    delete currentProjectile;
 }
 
 void Player::Update() {
     playerMovementComponent->Update();
+}
+
+Projectile* Player::GetCurrentProjectile() {
+    return currentProjectile;
+}
+
+void Player::SetCurrentProjectile(Projectile* p) {
+    currentProjectile = p;
 }

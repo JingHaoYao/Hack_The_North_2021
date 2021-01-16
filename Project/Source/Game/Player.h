@@ -5,6 +5,7 @@
 #include "GameEngine/EntitySystem/Components/SoundComponent.h"
 #include "GameEngine/EntitySystem/Components/PlayerMovementComponent.h"
 #include "GameEngine/Util/TextureManager.h"
+#include "Game/Projectile.h"
 
 namespace Game {
 
@@ -12,14 +13,17 @@ namespace Game {
     {
     public:
         Player(GameEngine::eTexture::type);
-
         ~Player();
+        
+        Projectile* GetCurrentProjectile();
+        void SetCurrentProjectile(Projectile*);
 
     protected:
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
         GameEngine::CollidableComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
         GameEngine::PlayerMovementComponent* playerMovementComponent;
+        Projectile* currentProjectile;
 
         void Update();
     };

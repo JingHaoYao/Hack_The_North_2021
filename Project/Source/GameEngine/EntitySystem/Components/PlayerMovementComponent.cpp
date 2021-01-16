@@ -25,11 +25,11 @@ void PlayerMovementComponent::Update() {
 		int angleOffset = 0;
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			angleOffset = -1;
+			angleOffset += -1;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			angleOffset = +1;
+			angleOffset += +1;
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
