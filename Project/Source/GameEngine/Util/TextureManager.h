@@ -5,7 +5,6 @@
 
 namespace GameEngine
 {
-	//TODO - if needed, move out of Engine part to some sort of loader on the game side of things
 	namespace eTexture
 	{
 		enum type
