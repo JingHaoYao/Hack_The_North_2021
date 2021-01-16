@@ -21,12 +21,16 @@ namespace Game
 		bool IsGameOver();
 		Player* GetPlayerByIndex(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
+		
 
 
 	protected:
+		int widthPx, heightPx,numX,numY,remainderX,remainderY;
 		void CreatePlayer();
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
+		std::vector<std::vector<int>> wallGrid;
+		void populateWalls();
 	};
 }
 
