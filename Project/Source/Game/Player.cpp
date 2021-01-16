@@ -1,4 +1,6 @@
 #include "Player.h"
+#include "Explosion.h"
+#include "GameEngine/GameEngineMain.h"
 
 using namespace Game;
 
@@ -41,4 +43,11 @@ Projectile* Player::GetCurrentProjectile() {
 
 void Player::SetCurrentProjectile(Projectile* p) {
     currentProjectile = p;
+}
+
+void Player::PlayerDied() {
+    // spawn explosion
+    Explosion* explosionInstant = new Explosion(GetPos(), sf::Vector2f(60.f, 60.f));
+    GameEngine::GameEngineMain::GetInstance()->AddEntity(explosionInstant);
+    // reload player state
 }

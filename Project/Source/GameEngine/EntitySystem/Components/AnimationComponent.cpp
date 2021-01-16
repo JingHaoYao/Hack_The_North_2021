@@ -10,6 +10,7 @@ AnimationComponent::AnimationComponent()
 	, m_currentFrame(0)
 	, m_currentFrameDT(0.f)
 	, m_isLooping(true)
+	, m_shouldDestroy(false)
 {
 
 }
@@ -30,6 +31,10 @@ void AnimationComponent::OnAddToWorld()
 void AnimationComponent::OnRemoveFromWorld()
 {
 	Component::OnRemoveFromWorld();
+}
+
+void AnimationComponent::SetShouldDestroy(bool shouldDestroy) {
+	m_shouldDestroy = shouldDestroy;
 }
 
 
@@ -83,6 +88,9 @@ void AnimationComponent::StopAnim()
 	m_currentAnim = EAnimationId::None;
 	m_currentFrame = 0;
 	m_currentFrameDT = 0.f;
+	if (m_shouldDestroy) {
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(GetEntity());
+	}
 }
 
 

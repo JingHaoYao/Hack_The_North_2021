@@ -19,6 +19,7 @@ namespace Game {
         
         Projectile* GetCurrentProjectile();
         void SetCurrentProjectile(Projectile*);
+        void PlayerDied(); //pepesad
 
     protected:
         GameEngine::SpriteRenderComponent* spriteRenderComponent;

@@ -15,6 +15,7 @@ namespace GameEngine
 
 		void PlayAnim(EAnimationId::type animId);
 		void StopAnim();
+		void SetShouldDestroy(bool);
 
 		void SetIsLooping(bool looping) { m_isLooping = looping; }
 
@@ -30,6 +31,8 @@ namespace GameEngine
 		float m_currentFrameDT;
 
 		bool m_isLooping;
+		
+		bool m_shouldDestroy;
 	};
 }
 

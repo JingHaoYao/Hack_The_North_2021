@@ -22,6 +22,7 @@ namespace GameEngine
 			Tank_Green = 8,
 			Tank_Red = 9,
 			Tank_Yellow = 10,
+			Explosion_0 = 11,
 
 			Count,
 		};
@@ -41,7 +42,7 @@ namespace GameEngine
 			case eTexture::Tank_Green: return "tank_green.png";
 			case eTexture::Tank_Red: return "tank_red.png";
 			case eTexture::Tank_Yellow: return "tank_yellow.png";
-
+			case eTexture::Explosion_0: return "explosion_0.png";
 		}
 		return "UnknownTexType";
 	}

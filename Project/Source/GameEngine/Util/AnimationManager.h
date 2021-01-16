@@ -10,8 +10,10 @@ namespace GameEngine
 	namespace EAnimationId
 	{
 		enum type
-		{			
-			None,
+		{
+			None = 0,
+			Explosion_0 = 1,
+			Count
 		};
 	}
 

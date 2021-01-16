@@ -78,9 +78,16 @@ void PlayerCollisionComponent::Update()
 				}
 
 				// player hit
-				GameEngine::GameEngineMain::GetInstance()->RemoveEntity(colComponent->GetEntity());
-				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->SetCurrentProjectile(NULL);
-				// TODO: run death procedure on player instant
+
+				Entity* projectileEntity = colComponent->GetEntity();
+				for each (auto var in Game::GameBoard::getInstance()->GetAllPlayers())
+				{
+					if (var->GetCurrentProjectile() == projectileEntity) {
+						var->SetCurrentProjectile(NULL);
+					}
+				}
+				GameEngine::GameEngineMain::GetInstance()->RemoveEntity(projectileEntity);
+				Game::GameBoard::getInstance()->GetPlayerByIndex(playerIndex)->PlayerDied();
 			}
 		}
 		else {

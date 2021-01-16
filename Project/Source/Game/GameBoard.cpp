@@ -42,3 +42,7 @@ void GameBoard::CreatePlayer()
 Player* GameBoard::GetPlayerByIndex(int i) {
 	return players[i];
 }
+
+std::vector<Game::Player*> GameBoard::GetAllPlayers() {
+	return players;
+}

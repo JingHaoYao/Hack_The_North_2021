@@ -21,7 +21,7 @@ namespace Game
 		bool IsGameOver();
 		Player* GetPlayerByIndex(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
-
+		std::vector<Game::Player*> GetAllPlayers();
 
 	protected:
 		void CreatePlayer();
