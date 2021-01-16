@@ -55,6 +55,7 @@ void PlayerShootComponent::CreateProjectile() {
 
         newProjectile->SetPos(playerPos + projectileOffset);
         newProjectile->SetSize(sf::Vector2f(13.f, 13.f));
+        newProjectile->SetPlayerIndex(GetPlayerIndex());
     }
 }
 

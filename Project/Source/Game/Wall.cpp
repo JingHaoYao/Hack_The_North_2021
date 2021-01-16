@@ -19,6 +19,8 @@ Wall::Wall(int x, int y, GameEngine::eTexture::type eTexture) {
 
     // Sounds
     soundComponent = AddComponent<GameEngine::SoundComponent>();
+
+    m_layer = GameEngine::CollisionLayer::Wall;
 }
 
 Wall::~Wall() {
