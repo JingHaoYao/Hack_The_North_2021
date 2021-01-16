@@ -8,6 +8,7 @@ using namespace GameEngine;
 
 PlayerProjectileCollisionComponent::PlayerProjectileCollisionComponent() {
 	leftPlayerHitbox = false;
+	currentAngleTravel = 0;
 }
 
 PlayerProjectileCollisionComponent::~PlayerProjectileCollisionComponent() {
@@ -42,27 +43,30 @@ void PlayerProjectileCollisionComponent::Update()
 		AABBRect colideBox = colComponent->GetWorldAABB();
 		if (myBox.intersects(colideBox, intersection))
 		{
-
 			if (colComponent->GetEntity()->GetLayer() == CollisionLayer::Wall) {
 				// need to find which side of the wall it crashes with.
 				sf::Vector2f pos = GetEntity()->GetPos();
+				float boundedAngle = fmod(currentAngleTravel + 360, 360);
+
 				if (intersection.width < intersection.height)
 				{
-					if (myBox.left < colideBox.left) {
-						// hit right
-					}
-					else {
-						// hit left
-					}
+					if (myBox.left < colideBox.left)
+						pos.x -= intersection.width;
+					else
+						pos.x += intersection.width;
+
+					// reflect across Y-axis
+					SetCurrentAngleTravel(fmod(180 - boundedAngle + 360, 360));
 				}
 				else
 				{
-					if (myBox.top < colideBox.top) {
-						// hit top
-					}
-					else {
-						// hit bottom
-					}
+					if (myBox.top < colideBox.top)
+						pos.y -= intersection.height;
+					else
+						pos.y += intersection.height;
+
+					// reflect across X-axis
+					SetCurrentAngleTravel(fmod(-boundedAngle + 360, 360));
 				}
 
 				GetEntity()->SetPos(pos);
@@ -79,6 +83,10 @@ void PlayerProjectileCollisionComponent::FlagLeftPlayerHitBox() {
 	leftPlayerHitbox = true;
 }
 
-void PlayerProjectileCollisionComponent::SetProjectileInstant(Game::Projectile* p) {
-	projectileInstance = p;
+void PlayerProjectileCollisionComponent::SetCurrentAngleTravel(float angleTravel) {
+	currentAngleTravel = angleTravel;
+}
+
+float PlayerProjectileCollisionComponent::GetCurrentAngleTravel() {
+	return currentAngleTravel;
 }

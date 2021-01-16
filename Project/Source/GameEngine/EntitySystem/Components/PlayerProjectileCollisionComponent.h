@@ -1,22 +1,24 @@
 #pragma once
 #include "GameEngine/EntitySystem/Components/CollidableComponent.h"
-#include "Game/Projectile.h"
 
-class PlayerProjectileCollisionComponent : public GameEngine::CollidableComponent {
-public:
-	PlayerProjectileCollisionComponent();
-	virtual ~PlayerProjectileCollisionComponent();
+namespace GameEngine { 
+	class PlayerProjectileCollisionComponent : public GameEngine::CollidableComponent {
+	public:
+		PlayerProjectileCollisionComponent();
+		virtual ~PlayerProjectileCollisionComponent();
 
-	virtual void OnAddToWorld() override;
-	virtual void OnRemoveFromWorld() override;
+		virtual void OnAddToWorld() override;
+		virtual void OnRemoveFromWorld() override;
 
-	virtual void Update() override;
+		virtual void Update() override;
 
-	bool HasLeftPlayerHitBox();
-	void FlagLeftPlayerHitBox();
-	void SetProjectileInstant(Game::Projectile*);
+		bool HasLeftPlayerHitBox();
+		void FlagLeftPlayerHitBox();
+		void SetCurrentAngleTravel(float);
+		float GetCurrentAngleTravel();
 
-protected: 
-	bool leftPlayerHitbox;
-	Game::Projectile* projectileInstance;
-};
+	protected:
+		bool leftPlayerHitbox;
+		float currentAngleTravel;
+	};
+}

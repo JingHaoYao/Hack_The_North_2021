@@ -1,19 +1,20 @@
 #pragma once
 #include "GameEngine/EntitySystem/Components/CollidableComponent.h"
-#include "Game/Player.h"
 
-class PlayerCollisionComponent : public GameEngine::CollidableComponent {
-public:
-	PlayerCollisionComponent();
-	virtual ~PlayerCollisionComponent();
+namespace GameEngine {
+	class PlayerCollisionComponent : public GameEngine::CollidableComponent {
+	public:
+		PlayerCollisionComponent();
+		virtual ~PlayerCollisionComponent();
 
-	virtual void OnAddToWorld() override;
-	virtual void OnRemoveFromWorld() override;
+		virtual void OnAddToWorld() override;
+		virtual void OnRemoveFromWorld() override;
 
-	virtual void Update() override;
+		virtual void Update() override;
 
-	void SetPlayerInstant(Game::Player*);
+		void SetPlayerIndex(int);
 
-protected:
-	Game::Player* playerInstant;
-};
+	protected:
+		int playerIndex;
+	};
+}
