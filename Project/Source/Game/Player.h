@@ -3,6 +3,7 @@
 #include "GameEngine/EntitySystem/Components/SpriteRenderComponent.h"
 #include "GameEngine/EntitySystem/Components/CollidableComponent.h"
 #include "GameEngine/EntitySystem/Components/SoundComponent.h"
+#include "GameEngine/EntitySystem/Components/PlayerMovementComponent.h"
 #include "GameEngine/Util/TextureManager.h"
 
 namespace Game {
@@ -18,6 +19,8 @@ namespace Game {
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
         GameEngine::CollidableComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
+        GameEngine::PlayerMovementComponent* playerMovementComponent;
+
         void Update();
     };
 

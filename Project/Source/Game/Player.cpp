@@ -6,7 +6,7 @@ using namespace Game;
 Player::Player(GameEngine::eTexture::type eTexture) {
 
     // Movement
-
+    playerMovementComponent = AddComponent<GameEngine::PlayerMovementComponent>();
 
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
@@ -25,5 +25,5 @@ Player::~Player() {
 }
 
 void Player::Update() {
-
+    playerMovementComponent->Update();
 }
