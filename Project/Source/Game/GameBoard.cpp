@@ -52,9 +52,9 @@ void GameBoard::CreateUpgradeCrate(PlayerUpgrade u, sf::Vector2f p) {
 sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
 	switch (i) {
 	case 0:
-		return sf::Vector2f(100.f, 100.f);
+		return GameBoard::Player1SpawnPosition();
 	case 1:
-		return sf::Vector2f(1180.f, 620.f);
+		return GameBoard::Player2SpawnPosition();
 	}
 }
 
@@ -104,8 +104,8 @@ std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 sf::Vector2f GameBoard::Player1SpawnPosition() {
 
 	srand(time(0));
-	float currentX = rand() % (1280-6) + 6;
-	float currentY = rand() % (720-6) + 6;
+	float currentX = rand() % (1280 - 120) + 60;
+	float currentY = rand() % (720 - 120) + 60;
 
 	// do wall checks
 
@@ -114,8 +114,8 @@ sf::Vector2f GameBoard::Player1SpawnPosition() {
 
 sf::Vector2f GameBoard::Player2SpawnPosition() {
 
-	float currentX = rand() % (1280 - 6) + 6;
-	float currentY = rand() % (720 - 6) + 6;
+	float currentX = rand() % (1280 - 120) + 60;
+	float currentY = rand() % (720 - 120) + 60;
 
 	// do wall checks
 
@@ -124,8 +124,8 @@ sf::Vector2f GameBoard::Player2SpawnPosition() {
 
 sf::Vector2f GameBoard::ProjectileSpawnPosition() {
 	
-	float currentX = rand() % (1280 - 6) + 6;
-	float currentY = rand() % (720 - 6) + 6;
+	float currentX = rand() % (1280 - 120) + 60;
+	float currentY = rand() % (720 - 120) + 60;
 
 	// do wall checks
 
