@@ -23,12 +23,27 @@ namespace GameEngine
 			Tank_Green = 8,
 			Tank_Red = 9,
 			Tank_Yellow = 10,
+
 			Count,
 		};
 	}	
 
 	inline const char* GetPath(eTexture::type texture)
 	{
+		switch (texture) {
+			case eTexture::Basic_Projectile: return "basic_projectile.png";
+			case eTexture::Bomb_Projectile: return "bomb_projectile.png";
+			case eTexture::Crate_Bomb: return "crate_bomb.png";
+			case eTexture::Crate_Laser: return "crate_laser.png";
+			case eTexture::Crate_Machine_Gun: return "crate_machine_gun.png";
+			case eTexture::Create_Rocket: return "crate_rocket.png";
+			case eTexture::Rocket_Projectile: return "rocket_projectile.png";
+			case eTexture::Tank_Blue: return "tank_blue.png";
+			case eTexture::Tank_Green: return "tank_green.png";
+			case eTexture::Tank_Red: return "tank_red.png";
+			case eTexture::Tank_Yellow: return "tank_yellow.png";
+
+		}
 		return "UnknownTexType";
 	}
 
