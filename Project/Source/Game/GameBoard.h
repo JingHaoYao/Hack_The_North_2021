@@ -1,6 +1,5 @@
 #pragma once
 #include "GameEngine/EntitySystem/Entity.h"
-
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 #include "Game/Player.h"
@@ -24,9 +23,12 @@ namespace Game
 		std::vector<Game::Player*> GetAllPlayers();
 
 	protected:
+		int widthPx, heightPx,numX,numY,remainderX,remainderY;
 		void CreatePlayer();
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
+		std::vector<std::vector<int>> wallGrid;
+		void populateWalls();
 	};
 }
 

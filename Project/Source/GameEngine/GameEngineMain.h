@@ -6,6 +6,7 @@
 #include "GameEngine/EntitySystem/Entity.h"
 #include "GameEngine/EntitySystem/Components/RenderComponent.h"
 
+
 namespace GameEngine
 {
 	class GameEngineMain
@@ -17,6 +18,8 @@ namespace GameEngine
 		//Returns time between update frames in seconds
 		static float		   GetTimeDelta() { return GetInstance()->m_lastDT; }
 		static float		   GetGameTime() { return sm_gameClock.getElapsedTime().asSeconds(); }
+		static float GetWinHeight() { return WINDOW_HEIGHT; }
+		static float GetWinWidth() { return WINDOW_WIDTH; }
 
 		sf::RenderWindow* GetRenderWindow() const { return m_renderWindow; }
 		void Update();		
