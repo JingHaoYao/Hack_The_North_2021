@@ -17,6 +17,10 @@ namespace Game
 
 		void Update();		
 		bool IsGameOver() { return false; }
+
+	private:
+		void CreatePlayer();
+		std::vector<GameEngine::Entity*> players;
 	};
 }
 
