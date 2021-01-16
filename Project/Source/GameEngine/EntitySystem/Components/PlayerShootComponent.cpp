@@ -30,6 +30,10 @@ void PlayerShootComponent::Update() {
             CreateProjectile();
         }
         break;
+    case 1:
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::M)) {
+            CreateProjectile();
+        }
     }
 }
 
