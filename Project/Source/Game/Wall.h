@@ -9,10 +9,16 @@ namespace Game {
     class Wall : public GameEngine::Entity
     {
     public:
-        Wall();
+        Wall(int, int);
         ~Wall();
+        int GetPosX();
+        void SetPosX(int);
+        int GetPosY();
+        void SetPosY(int);
 
     protected:
+        int posX;
+        int posY;
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
         GameEngine::CollidableComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
