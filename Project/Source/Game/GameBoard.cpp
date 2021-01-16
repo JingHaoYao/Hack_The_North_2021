@@ -44,7 +44,7 @@ void GameBoard::CreatePlayer()
 	this->players.push_back(newPlayer1);
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newPlayer1);
 
-	newPlayer1->SetPos(sf::Vector2f(50.f, 50.f));
+	newPlayer1->SetPos(sf::Vector2f(100.f, 100.f));
 	newPlayer1->SetSize(sf::Vector2f(36.f, 50.f));
 
 	GameEngine::eTexture::type sprite2 = GameEngine::eTexture::type::Tank_Blue;
@@ -52,7 +52,7 @@ void GameBoard::CreatePlayer()
 	this->players.push_back(newPlayer2);
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newPlayer2);
 
-	newPlayer2->SetPos(sf::Vector2f(1230.f, 670.f));
+	newPlayer2->SetPos(sf::Vector2f(1180.f, 620.f));
 	newPlayer2->SetSize(sf::Vector2f(36.f, 50.f));
 }
 
