@@ -15,7 +15,7 @@ PlayerMovementComponent::PlayerMovementComponent() {
 }
 
 PlayerMovementComponent::~PlayerMovementComponent() {
-
+	Component::~Component();
 }
 
 void PlayerMovementComponent::Update() {
