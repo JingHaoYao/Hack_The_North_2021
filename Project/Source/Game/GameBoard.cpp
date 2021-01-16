@@ -2,7 +2,6 @@
 #include "Player.h"
 #include "GameEngine/GameEngineMain.h"
 #include "GameEngine/Util/TextureManager.h"
-#include "Game/Wall.h"
 
 
 
@@ -15,14 +14,14 @@ GameBoard::GameBoard()
 	CreatePlayer();
 	widthPx = GameEngine::GameEngineMain::GetWinWidth();
 	heightPx = GameEngine::GameEngineMain::GetWinHeight();
-	numX = (widthPx-20) / 64;
-	numY = (heightPx-20) / 64;
-	remainderX = (widthPx) % (numX * 64);
-	remainderY = (heightPx) % (numY * 64);
+	numX = (widthPx-20) / 16;
+	numY = (heightPx-20) / 16;
+	remainderX = (widthPx) % (numX * 16);
+	remainderY = (heightPx) % (numY * 16);
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
-
 	}
+	populateWalls();
 }
 GameBoard::~GameBoard()
 {
@@ -67,12 +66,41 @@ void GameBoard::populateWalls() {
 	for (int i = 0; i < numX; i++) {
 		if (i == 0 || i == numX - 1) {
 			for (int j = 0; j < numY; j++) {
-				if (j == 0 || j == numY - 1) {
-					wallGrid[i][j] = 1;
-				}
+				wallGrid[i][j] = 1;
 			}
 		}
 	}
-	std::vector<Game::Wall> map;
 
+	for (int i = 0; i < numX; i++) {
+		for (int j = 0; j < numY; j++) {
+			if (j == 0 || j == numY - 1) {
+				wallGrid[i][j] = 1;
+			}
+		}
+	}
+		
+	std::vector<Wall*> map;
+
+	// wall spawning
+	for (int i = 0; i < numX; i++) {
+		for (int j = 0; j < numY; j++) {
+			if (wallGrid[i][j] == 1) {
+				Wall* newWall = CreateWall(i, j);
+				map.push_back(newWall);
+			}
+		}
+	}
+
+}
+
+Wall* GameBoard::CreateWall(int i, int j) {
+
+	GameEngine::eTexture::type wallSprite = GameEngine::eTexture::type::Transparent_Wall;
+	Wall* newWall = new Wall(i * 16 + remainderX / 2 + 5, j * 16 + remainderY / 2 + 5, wallSprite);
+	GameEngine::GameEngineMain::GetInstance()->AddEntity(newWall);
+
+	newWall->SetPos(sf::Vector2f(newWall->GetPosX(), newWall->GetPosY()));
+	newWall->SetSize(sf::Vector2f(16.f, 16.f));
+
+	return newWall;
 }
