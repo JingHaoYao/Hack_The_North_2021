@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "Explosion.h"
 #include "GameEngine/GameEngineMain.h"
+#include "Game/GameBoard.h"
 
 using namespace Game;
 
@@ -26,6 +27,8 @@ Player::Player(GameEngine::eTexture::type eTexture, int binding) {
     playerShootComponent = AddComponent<GameEngine::PlayerShootComponent>();
     playerShootComponent->SetPlayerIndex(binding);
     playerShootComponent->SetBinding(binding);
+    playerNumber = binding;
+    currentPlayerUpgrade = PlayerUpgrade::None;
 }
 
 Player::~Player() {
@@ -50,5 +53,15 @@ void Player::PlayerDied() {
     // spawn explosion
     Explosion* explosionInstant = new Explosion(GetPos(), sf::Vector2f(60.f, 60.f));
     GameEngine::GameEngineMain::GetInstance()->AddEntity(explosionInstant);
+
+    SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(playerNumber));
     // reload player state
+}
+
+void Player::SetPlayerUpgrade(PlayerUpgrade u) {
+    currentPlayerUpgrade = u;
+}
+
+PlayerUpgrade Player::GetPlayerUpgrade() {
+    return currentPlayerUpgrade;
 }

@@ -20,6 +20,7 @@ namespace Game
 		void Update();		
 		bool IsGameOver();
 		Player* GetPlayerByIndex(int);
+		sf::Vector2f GetPlayerSpawnPosition(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
 		std::vector<Game::Player*> GetAllPlayers();
 		Wall* CreateWall(int, int);

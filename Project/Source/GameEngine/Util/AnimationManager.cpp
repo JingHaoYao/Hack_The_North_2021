@@ -21,12 +21,22 @@ void AnimationManager::InitStaticGameAnimations()
 {
 	m_animDefinitions.push_back
 	(
-	SAnimationDefinition(
-	EAnimationId::Explosion_0,
-	eTexture::Explosion_0,
-	sf::Vector2i(0, 0),
-	8,
-	12)
+		SAnimationDefinition(
+			EAnimationId::Explosion_0,
+			eTexture::Explosion_0,
+			sf::Vector2i(0, 0),
+			8,
+			12)
+	);
+
+	m_animDefinitions.push_back
+	(
+		SAnimationDefinition(
+			EAnimationId::Laser_Projectile,
+			eTexture::Laser_Projectile,
+			sf::Vector2i(0, 0),
+			6,
+			12)
 	);
 }
 

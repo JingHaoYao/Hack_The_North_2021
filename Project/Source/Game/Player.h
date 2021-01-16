@@ -9,6 +9,15 @@
 #include "Game/Projectile.h"
 
 namespace Game {
+    enum PlayerUpgrade {
+        None,
+        Rocket,
+        Bomb,
+        Laser,
+        MachineGun,
+        Count
+    };
+
     class Projectile;
 
     class Player : public GameEngine::Entity
@@ -20,6 +29,8 @@ namespace Game {
         Projectile* GetCurrentProjectile();
         void SetCurrentProjectile(Projectile*);
         void PlayerDied(); //pepesad
+        void SetPlayerUpgrade(PlayerUpgrade);
+        PlayerUpgrade GetPlayerUpgrade();
 
     protected:
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
@@ -28,6 +39,8 @@ namespace Game {
         GameEngine::PlayerMovementComponent* playerMovementComponent;
         GameEngine::PlayerShootComponent* playerShootComponent;
         Projectile* currentProjectile;
+        PlayerUpgrade currentPlayerUpgrade;
+        int playerNumber;
 
         void Update();
     };

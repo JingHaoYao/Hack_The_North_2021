@@ -25,6 +25,7 @@ namespace GameEngine
 			Explosion_0 = 11,
 			Explosion_0_Base = 12,
 			Transparent_Wall = 13,
+			Laser_Projectile = 14,
 
 			Count,
 		};
@@ -47,6 +48,7 @@ namespace GameEngine
 			case eTexture::Explosion_0: return "explosion_0.png";
 			case eTexture::Explosion_0_Base: return "explosion_0_base.png";
 			case eTexture::Transparent_Wall: return "transparent_wall.png";
+			case eTexture::Laser_Projectile: return "laser_projectile.png";
 		}
 		return "UnknownTexType";
 	}

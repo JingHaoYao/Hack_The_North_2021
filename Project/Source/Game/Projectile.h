@@ -12,6 +12,7 @@ namespace Game {
     {
     public:
         Projectile(GameEngine::eTexture::type);
+        Projectile();
         ~Projectile();
 
         void SetAngleOfTravel(float);

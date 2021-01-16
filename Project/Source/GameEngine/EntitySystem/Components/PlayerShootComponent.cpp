@@ -41,8 +41,14 @@ void PlayerShootComponent::Update() {
 void PlayerShootComponent::CreateProjectile() {
     Game::Player* playerInstance = Game::GameBoard::getInstance()->GetPlayerByIndex(GetPlayerIndex());
     if (playerInstance->GetCurrentProjectile() == NULL) {
-        GameEngine::eTexture::type sprite = GameEngine::eTexture::type::Basic_Projectile;
-        Projectile* newProjectile = new Projectile(sprite);
+        Projectile* newProjectile = NULL;
+
+        switch (playerInstance->GetPlayerUpgrade()) {
+        case PlayerUpgrade::None:
+            newProjectile = new Projectile();
+            break;
+        }
+
         playerInstance->SetCurrentProjectile(newProjectile);
         GameEngine::GameEngineMain::GetInstance()->AddEntity(newProjectile);
 

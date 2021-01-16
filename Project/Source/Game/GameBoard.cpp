@@ -33,6 +33,15 @@ void GameBoard::Update()
 	
 }
 
+sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
+	switch (i) {
+	case 0:
+		return sf::Vector2f(100.f, 100.f);
+	case 1:
+		return sf::Vector2f(1180.f, 620.f);
+	}
+}
+
 bool GameBoard::IsGameOver() {
 	return false;
 }

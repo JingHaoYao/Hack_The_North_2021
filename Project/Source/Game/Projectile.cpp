@@ -9,7 +9,7 @@ using namespace Game;
 Projectile::Projectile(GameEngine::eTexture::type eTexture) {
 
     // Variables
-    keybinding = 1;
+    keybinding = 0;
     projectileSpeed = 200.f;
     angleOfTravel = 0.f;
     duration = 5.f;
@@ -18,6 +18,28 @@ Projectile::Projectile(GameEngine::eTexture::type eTexture) {
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
     spriteRenderComponent->SetTexture(eTexture);
+    spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
+
+    // Collisions
+    collidableComponent = AddComponent<GameEngine::PlayerProjectileCollisionComponent>();
+
+    // Sounds
+    soundComponent = AddComponent<GameEngine::SoundComponent>();
+
+    m_layer = GameEngine::CollisionLayer::PlayerProjectile; // set layer
+}
+
+Projectile::Projectile() {
+    // Variables
+    keybinding = 0;
+    projectileSpeed = 200.f;
+    angleOfTravel = 0.f;
+    duration = 5.f;
+    timeElapsed = 0.f;
+
+    // Render
+    spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
+    spriteRenderComponent->SetTexture(GameEngine::eTexture::Basic_Projectile);
     spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
 
     // Collisions
