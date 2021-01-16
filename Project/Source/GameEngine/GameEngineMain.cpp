@@ -8,6 +8,7 @@
 #include "Util/TextureManager.h"
 #include "Util/AnimationManager.h"
 #include "Util/CameraManager.h"
+#include "Game/GameBoard.h"
 
 using namespace GameEngine;
 
@@ -20,7 +21,6 @@ sf::Clock		GameEngineMain::sm_gameClock;
 
 GameEngineMain::GameEngineMain()
 	: m_renderTarget(nullptr)
-	, m_gameBoard(nullptr)
 	, m_windowInitialised(false)
 {
 	CreateAndSetUpWindow();
@@ -43,7 +43,6 @@ GameEngineMain::~GameEngineMain()
 void GameEngineMain::OnInitialised()
 {
 	//Engine is initialised, this spot should be used for game object and clocks initialisation
-	m_gameBoard = new Game::GameBoard();
 	sm_deltaTimeClock.restart();
 	sm_gameClock.restart();
 }
@@ -105,8 +104,8 @@ void GameEngineMain::Update()
 	RemovePendingEntities();
 
 	UpdateWindowEvents();
-	if (m_gameBoard)
-		m_gameBoard->Update();
+	if (Game::GameBoard::getInstance())
+		Game::GameBoard::getInstance()->Update();
 
 	UpdateEntities();
 	RenderEntities();

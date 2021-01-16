@@ -6,12 +6,12 @@
 
 using namespace Game;
 
+GameBoard* GameBoard::m_gameboard = nullptr;
+
 GameBoard::GameBoard()
-	
 {
 	CreatePlayer();
 }
-
 
 GameBoard::~GameBoard()
 {
@@ -21,6 +21,10 @@ GameBoard::~GameBoard()
 void GameBoard::Update()
 {	
 	
+}
+
+bool GameBoard::IsGameOver() {
+	return false;
 }
 
 void GameBoard::CreatePlayer() 
@@ -33,4 +37,8 @@ void GameBoard::CreatePlayer()
 	
 	newPlayer->SetPos(sf::Vector2f(50.f, 50.f));
 	newPlayer->SetSize(sf::Vector2f(36.f, 50.f));
+}
+
+Player* GameBoard::GetPlayerByIndex(int i) {
+	return players[i];
 }

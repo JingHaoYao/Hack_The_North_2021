@@ -16,17 +16,21 @@ namespace Game {
 
         void SetAngleOfTravel(float);
         float GetAngleOfTravel();
+        void SetDuration(float);
+        float GetDuration();
+        void SetTimeElapsed(float);
+        float GetTimeElapsed();
 
     protected:
         int keybinding;
         float projectileSpeed;
         float angleOfTravel;
         float duration;
+        float timeElapsed;
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
         GameEngine::CollidableComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
-        GameEngine::PlayerShootComponent* playerShootComponent;
         void Update();
     };
-    
+
 }

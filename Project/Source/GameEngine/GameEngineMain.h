@@ -3,8 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 
-#include "Game/GameBoard.h"
-
 #include "GameEngine/EntitySystem/Entity.h"
 #include "GameEngine/EntitySystem/Components/RenderComponent.h"
 
@@ -28,7 +26,6 @@ namespace GameEngine
 		void RemoveEntity(Entity* entity);
 
 		void OnInitialised();
-		bool IsGameOver() const { return m_gameBoard && m_gameBoard->IsGameOver(); }
 
 	private:
 		GameEngineMain();
@@ -55,7 +52,6 @@ namespace GameEngine
 		sf::RenderTarget*   m_renderTarget;
 		sf::RenderWindow*   m_renderWindow; //In future they will be different						
 
-		Game::GameBoard*    m_gameBoard;
 		float				m_lastDT;
 
 		bool m_windowInitialised;

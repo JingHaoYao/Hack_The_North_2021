@@ -4,10 +4,12 @@
 #include "GameEngine/EntitySystem/Components/CollidableComponent.h"
 #include "GameEngine/EntitySystem/Components/SoundComponent.h"
 #include "GameEngine/EntitySystem/Components/PlayerMovementComponent.h"
+#include "GameEngine/EntitySystem/Components/PlayerShootComponent.h"
 #include "GameEngine/Util/TextureManager.h"
 #include "Game/Projectile.h"
 
 namespace Game {
+    class Projectile;
 
     class Player : public GameEngine::Entity
     {
@@ -23,6 +25,7 @@ namespace Game {
         GameEngine::CollidableComponent* collidableComponent;
         GameEngine::SoundComponent* soundComponent;
         GameEngine::PlayerMovementComponent* playerMovementComponent;
+        GameEngine::PlayerShootComponent* playerShootComponent;
         Projectile* currentProjectile;
 
         void Update();

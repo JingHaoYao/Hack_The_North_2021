@@ -14,9 +14,9 @@ public:
 
 	bool HasLeftPlayerHitBox();
 	void FlagLeftPlayerHitBox();
-	void SetProjectileInstant(Projectile*);
+	void SetProjectileInstant(Game::Projectile*);
 
 protected: 
 	bool leftPlayerHitbox;
-	Projectile* projectileInstance;
+	Game::Projectile* projectileInstance;
 };

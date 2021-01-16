@@ -18,6 +18,9 @@ Player::Player(GameEngine::eTexture::type eTexture) {
 
     // Sounds
     soundComponent = AddComponent<GameEngine::SoundComponent>();
+
+    playerShootComponent = AddComponent<GameEngine::PlayerShootComponent>();
+    playerShootComponent->SetPlayerIndex(0);
 }
 
 Player::~Player() {
@@ -26,6 +29,7 @@ Player::~Player() {
 
 void Player::Update() {
     playerMovementComponent->Update();
+    playerShootComponent->Update();
 }
 
 Projectile* Player::GetCurrentProjectile() {

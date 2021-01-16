@@ -79,6 +79,6 @@ void PlayerProjectileCollisionComponent::FlagLeftPlayerHitBox() {
 	leftPlayerHitbox = true;
 }
 
-void PlayerProjectileCollisionComponent::SetProjectileInstant(Projectile* p) {
+void PlayerProjectileCollisionComponent::SetProjectileInstant(Game::Projectile* p) {
 	projectileInstance = p;
 }
