@@ -9,7 +9,7 @@ namespace Game {
     class Wall : public GameEngine::Entity
     {
     public:
-        Wall(int, int);
+        Wall(int, int, GameEngine::eTexture::type);
         ~Wall();
         int GetPosX();
         void SetPosX(int);

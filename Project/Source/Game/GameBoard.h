@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <vector>
 #include "Game/Player.h"
+#include "Game/Wall.h"
 
 namespace Game
 {
@@ -21,6 +22,7 @@ namespace Game
 		Player* GetPlayerByIndex(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
 		std::vector<Game::Player*> GetAllPlayers();
+		Wall* CreateWall(int, int);
 
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;

@@ -24,6 +24,7 @@ namespace GameEngine
 			Tank_Yellow = 10,
 			Explosion_0 = 11,
 			Explosion_0_Base = 12,
+			Transparent_Wall = 13,
 
 			Count,
 		};
@@ -45,6 +46,7 @@ namespace GameEngine
 			case eTexture::Tank_Yellow: return "tank_yellow.png";
 			case eTexture::Explosion_0: return "explosion_0.png";
 			case eTexture::Explosion_0_Base: return "explosion_0_base.png";
+			case eTexture::Transparent_Wall: return "transparent_wall.png";
 		}
 		return "UnknownTexType";
 	}

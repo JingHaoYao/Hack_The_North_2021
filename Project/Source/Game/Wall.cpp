@@ -2,7 +2,7 @@
 
 using namespace Game;
 
-Wall::Wall(int x, int y) {
+Wall::Wall(int x, int y, GameEngine::eTexture::type eTexture) {
     Wall::SetLayer(GameEngine::CollisionLayer::Player);
 
     // Variables
@@ -11,6 +11,7 @@ Wall::Wall(int x, int y) {
 
     // Render
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
+    spriteRenderComponent->SetTexture(eTexture);
     spriteRenderComponent->SetFillColor(sf::Color(200, 200, 200, 255));
 
     // Collisions
