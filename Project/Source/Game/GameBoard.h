@@ -30,6 +30,8 @@ namespace Game
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;
 		void CreateBackground();
 		void CreatePlayer();
+		sf::Vector2f Player1SpawnPosition();
+		sf::Vector2f Player2SpawnPosition();
 		void CreateUpgradeCrate(PlayerUpgrade, sf::Vector2f);
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
