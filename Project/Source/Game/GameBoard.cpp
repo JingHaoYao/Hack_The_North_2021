@@ -4,6 +4,7 @@
 #include "GameEngine/Util/TextureManager.h"
 #include "Game/PowerUpCrate.h"
 #include <cstdlib>
+#include <random>
 
 using namespace Game;
 
@@ -72,7 +73,7 @@ void GameBoard::CreatePlayer()
 	this->players.push_back(newPlayer1);
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newPlayer1);
 
-	newPlayer1->SetPos(sf::Vector2f(100.f, 100.f));
+	newPlayer1->SetPos(GameBoard::Player1SpawnPosition());
 	newPlayer1->SetSize(sf::Vector2f(36.f, 50.f));
 
 	GameEngine::eTexture::type sprite2 = GameEngine::eTexture::type::Tank_Blue;
@@ -80,7 +81,7 @@ void GameBoard::CreatePlayer()
 	this->players.push_back(newPlayer2);
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newPlayer2);
 
-	newPlayer2->SetPos(sf::Vector2f(1180.f, 620.f));
+	newPlayer2->SetPos(GameBoard::Player2SpawnPosition());
 	newPlayer2->SetSize(sf::Vector2f(36.f, 50.f));
 }
 
@@ -90,6 +91,30 @@ Player* GameBoard::GetPlayerByIndex(int i) {
 
 std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 	return players;
+}
+
+sf::Vector2f GameBoard::Player1SpawnPosition() {
+
+	srand(time(0));
+	float currentX = rand() % (1280-6) + 6;
+	float currentY = rand() % (720-6) + 6;
+
+	// do wall checks
+
+	return sf::Vector2f(currentX, currentY);
+}
+
+sf::Vector2f GameBoard::Player2SpawnPosition() {
+
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distributionX(6, 1274);
+	float currentX = distributionX(generator);
+	std::uniform_int_distribution<int> distributionY(6, 714);
+	float currentY = distributionY(generator);
+
+	// do wall checks
+
+	return sf::Vector2f(currentX, currentY);
 }
 
 void GameBoard::populateWalls() {
