@@ -20,11 +20,13 @@ GameBoard::GameBoard()
 	numY = (heightPx-20) / 16;
 	remainderX = (widthPx) % (numX * 16);
 	remainderY = (heightPx) % (numY * 16);
+	projectileSpawnTimer = 15.f;
+	projectileTimeElapsed = 0.f;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
 	populateWalls();
-	CreateUpgradeCrate(PlayerUpgrade::Laser, sf::Vector2f(200.f, 200.f));
+
 }
 GameBoard::~GameBoard()
 {
@@ -33,7 +35,13 @@ GameBoard::~GameBoard()
 
 void GameBoard::Update()
 {	
-	
+	if (projectileTimeElapsed >= projectileSpawnTimer) {
+		projectileTimeElapsed = 0.f;
+		CreateUpgradeCrate(PlayerUpgrade::Laser, ProjectileSpawnPosition());
+	}
+	else {
+		projectileTimeElapsed += GameEngine::GameEngineMain::GetTimeDelta();
+	}
 }
 
 void GameBoard::CreateUpgradeCrate(PlayerUpgrade u, sf::Vector2f p) {
@@ -106,11 +114,18 @@ sf::Vector2f GameBoard::Player1SpawnPosition() {
 
 sf::Vector2f GameBoard::Player2SpawnPosition() {
 
-	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distributionX(6, 1274);
-	float currentX = distributionX(generator);
-	std::uniform_int_distribution<int> distributionY(6, 714);
-	float currentY = distributionY(generator);
+	float currentX = rand() % (1280 - 6) + 6;
+	float currentY = rand() % (720 - 6) + 6;
+
+	// do wall checks
+
+	return sf::Vector2f(currentX, currentY);
+}
+
+sf::Vector2f GameBoard::ProjectileSpawnPosition() {
+	
+	float currentX = rand() % (1280 - 6) + 6;
+	float currentY = rand() % (720 - 6) + 6;
 
 	// do wall checks
 
@@ -139,7 +154,7 @@ void GameBoard::populateWalls() {
 	}
 
 	// Create Walls
-	for (int i = 0; i < 30; i++) {
+	for (int i = 0; i < 15; i++) {
 		wallGrid = ProceduralWallGeneration(wallGrid);
 	}
 
@@ -166,7 +181,7 @@ std::vector<std::vector<int>> GameBoard::ProceduralWallGeneration(std::vector<st
 	
 	grid[currentX][currentY] = 1;
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 3; i++) {
 		
 		randomDirection = rand() % 4;
 		lastDirection = randomDirection;

@@ -28,10 +28,12 @@ namespace Game
 
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;
+		float projectileSpawnTimer, projectileTimeElapsed;
 		void CreateBackground();
 		void CreatePlayer();
 		sf::Vector2f Player1SpawnPosition();
 		sf::Vector2f Player2SpawnPosition();
+		sf::Vector2f ProjectileSpawnPosition();
 		void CreateUpgradeCrate(PlayerUpgrade, sf::Vector2f);
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
