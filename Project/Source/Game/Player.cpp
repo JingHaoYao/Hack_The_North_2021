@@ -35,6 +35,7 @@ Player::~Player() {
 void Player::Update() {
     playerMovementComponent->Update();
     playerShootComponent->Update();
+    collidableComponent->Update();
 }
 
 Projectile* Player::GetCurrentProjectile() {

@@ -34,7 +34,7 @@ Projectile::~Projectile() {
 }
 
 void Projectile::Update() {
-
+    collidableComponent->Update();
     angleOfTravel = collidableComponent->GetCurrentAngleTravel();
 
     sf::Vector2f projectileVector = sf::Vector2f(cos(GetAngleOfTravel() * M_PI / 180.f), (sin(GetAngleOfTravel() * M_PI / 180.f)));

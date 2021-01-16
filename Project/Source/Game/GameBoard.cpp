@@ -64,6 +64,7 @@ Player* GameBoard::GetPlayerByIndex(int i) {
 std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 	return players;
 }
+
 void GameBoard::populateWalls() {
 	//1:wall 0:no wall
 	//boundaries
