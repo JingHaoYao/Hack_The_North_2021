@@ -4,6 +4,7 @@ using namespace Game;
 
 
 Player::Player(GameEngine::eTexture::type eTexture) {
+    Player::SetLayer(GameEngine::CollisionLayer::Player);
 
     // Movement
     playerMovementComponent = AddComponent<GameEngine::PlayerMovementComponent>();
