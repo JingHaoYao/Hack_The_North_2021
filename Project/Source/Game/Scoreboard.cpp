@@ -11,11 +11,16 @@ Scoreboard::Scoreboard(){
 	p2ScoreString = std::to_string(p2Score);
 	roundString = std::to_string(numRounds);
 	
+	// p1 score - p2 score
+	scoreboardString =/*"Round #: " + roundString + " "*/  p1ScoreString + " - " + p2ScoreString;
 	
 
 	//render
-	textRenderComponent->SetString(/*"Round #: " + roundString + " "*/  p1ScoreString + " - " + p2ScoreString); // p1 score - p2 score
-
+	textRenderComponent = AddComponent<GameEngine::TextRenderComponent>();
+	textRenderComponent->SetString(scoreboardString); 
+	textRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
+	textRenderComponent->SetFont("Roboto-Regular.ttf");
+	textRenderComponent->SetZLevel(10);
 	
 }
 
@@ -37,10 +42,14 @@ int Scoreboard::getRound() {
 
 void Scoreboard::setp1Score(int p1ScorePlus1) { //assumed: use player who wins would have score added by one player who lost would have same score
 	p1Score = p1ScorePlus1;
+	scoreboardString =/*"Round #: " + roundString + " "*/  p1ScoreString + " - " + p2ScoreString;
+	textRenderComponent->SetString(scoreboardString);
 }
 
 void Scoreboard::setp2Score(int p2ScorePlus1) {
 	p2Score = p2ScorePlus1;
+	scoreboardString =/*"Round #: " + roundString + " "*/  p1ScoreString + " - " + p2ScoreString;
+	textRenderComponent->SetString(scoreboardString);
 }
 
 void Scoreboard::setRound(int round) {

@@ -4,6 +4,7 @@
 #include <vector>
 #include "Game/Player.h"
 #include "Game/Wall.h"
+#include "Game/Scoreboard.h"
 
 namespace Game
 {
@@ -17,7 +18,7 @@ namespace Game
 		GameBoard();
 		virtual ~GameBoard();
 		void Update();		
-		void EndGame();
+		void EndGame(int);
 		Player* GetPlayerByIndex(int);
 		sf::Vector2f GetPlayerSpawnPosition(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
@@ -26,11 +27,13 @@ namespace Game
 		std::vector<std::vector<int>> ProceduralWallGeneration(std::vector<std::vector<int>>);
 
 	protected:
-		int widthPx, heightPx,numX,numY,remainderX,remainderY;
+		int widthPx, heightPx,numX,numY,remainderX,remainderY,losingPlayer;
 		float projectileSpawnTimer, projectileTimeElapsed;
 		bool gameOver;
 		std::vector<Wall*> map;
+		Game::Scoreboard* currentScoreBoard;
 		void CreateBackground();
+		Game::Scoreboard* CreateScoreBoard();
 		void CreatePlayer();
 		sf::Vector2f Player1SpawnPosition();
 		sf::Vector2f Player2SpawnPosition();
@@ -41,6 +44,7 @@ namespace Game
 		std::vector<std::vector<int>> wallGrid;
 		void PopulateWalls();
 		void DestroyWalls();
+		void UpdateScoreBoard();
 
 	};
 }

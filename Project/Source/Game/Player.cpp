@@ -59,8 +59,9 @@ void Player::PlayerDied() {
     Explosion* explosionInstant = new Explosion(GetPos(), sf::Vector2f(60.f, 60.f));
     GameEngine::GameEngineMain::GetInstance()->AddEntity(explosionInstant);
 
-    GameBoard::getInstance()->EndGame();
     std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
+    GameBoard::getInstance()->EndGame(playerNumber);
+
     for (int i = 0; i < currentPlayers.size(); i++) {
         currentPlayers[i]->SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(i));
     }

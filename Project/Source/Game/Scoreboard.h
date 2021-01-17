@@ -29,6 +29,7 @@ namespace Game {
 		std::string p1ScoreString;
 		std::string p2ScoreString;
 		std::string roundString;
+		std::string scoreboardString;
 		GameEngine::TextRenderComponent* textRenderComponent;
 
 	};

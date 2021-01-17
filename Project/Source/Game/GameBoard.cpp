@@ -13,6 +13,7 @@ GameBoard* GameBoard::m_gameboard = nullptr;
 GameBoard::GameBoard()
 {
 	CreateBackground();
+	currentScoreBoard = CreateScoreBoard();
 	CreatePlayer();
 	widthPx = GameEngine::GameEngineMain::GetWinWidth();
 	heightPx = GameEngine::GameEngineMain::GetWinHeight();
@@ -20,6 +21,7 @@ GameBoard::GameBoard()
 	numY = (heightPx-20) / 16;
 	remainderX = (widthPx) % (numX * 16);
 	remainderY = (heightPx) % (numY * 16);
+	losingPlayer = -1;
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
 	map;
@@ -57,6 +59,7 @@ void GameBoard::Update()
 		gameOver = false;
 		DestroyWalls();
 		PopulateWalls();
+		UpdateScoreBoard();
 	}
 }
 
@@ -74,8 +77,10 @@ sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
 	}
 }
 
-void GameBoard::EndGame() {
+void GameBoard::EndGame(int playerIndex) {
 	gameOver = true;
+	losingPlayer = playerIndex;
+	
 }
 
 void GameBoard::CreateBackground() {
@@ -236,4 +241,24 @@ void GameBoard::DestroyWalls() {
 		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(map[i]);
 	}
 	map.clear();
+}
+Game::Scoreboard* GameBoard::CreateScoreBoard() {
+	Scoreboard* newScoreBoard = new Scoreboard;
+	GameEngine::GameEngineMain::GetInstance()->AddEntity(newScoreBoard);
+	newScoreBoard->SetPos(sf::Vector2f(640, 360));
+	newScoreBoard->SetSize(sf::Vector2f(640, 360));
+	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(newScoreBoard->AddComponent<GameEngine::SpriteRenderComponent>());
+	render->SetTexture(GameEngine::eTexture::Background);
+	render->SetFillColor(sf::Color::Transparent);
+	return newScoreBoard;
+}
+
+void GameBoard::UpdateScoreBoard() {
+	if (losingPlayer == 0) { // p2 dub
+		currentScoreBoard->setp2Score(currentScoreBoard->getp2Score() + 1);
+	}
+	else if (losingPlayer == 1) {//p1 dub
+		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
+
+	}
 }
