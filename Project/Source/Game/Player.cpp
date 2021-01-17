@@ -45,6 +45,10 @@ std::vector<Projectile*> Player::GetCurrentProjectiles() {
     return currentProjectiles;
 }
 
+void Player::ClearPlayerProjectiles() {
+    currentProjectiles.clear();
+}
+
 void Player::AddCurrentProjectile(Projectile* p) {
     currentProjectiles.push_back(p);
 }
