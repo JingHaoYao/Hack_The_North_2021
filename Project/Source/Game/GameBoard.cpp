@@ -22,10 +22,11 @@ GameBoard::GameBoard()
 	remainderY = (heightPx) % (numY * 16);
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
+	map;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
-	populateWalls();
+	PopulateWalls();
 
 }
 GameBoard::~GameBoard()
@@ -41,6 +42,11 @@ void GameBoard::Update()
 	}
 	else {
 		projectileTimeElapsed += GameEngine::GameEngineMain::GetTimeDelta();
+	}
+	if (gameOver) {
+		gameOver = false;
+		DestroyWalls();
+		PopulateWalls();
 	}
 }
 
@@ -58,8 +64,8 @@ sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
 	}
 }
 
-bool GameBoard::IsGameOver() {
-	return false;
+void GameBoard::EndGame() {
+	gameOver = true;
 }
 
 void GameBoard::CreateBackground() {
@@ -132,11 +138,13 @@ sf::Vector2f GameBoard::ProjectileSpawnPosition() {
 	return sf::Vector2f(currentX, currentY);
 }
 
-void GameBoard::populateWalls() {
+void GameBoard::PopulateWalls() {
 	//1:wall 0:no wall
-
-	std::vector<Wall*> map;
-
+	for (int i = 0; i < numX; i++) {
+		for (int j = 0; j < numY; j++) {
+			wallGrid[i][j] = 0;
+		}
+	}
 	// create borders
 	for (int i = 0; i < numX; i++) {
 		if (i == 0 || i == numX - 1) {
@@ -211,4 +219,11 @@ Wall* GameBoard::CreateWall(int i, int j) {
 	newWall->SetSize(sf::Vector2f(18.f, 18.f));
 
 	return newWall;
+}
+
+void GameBoard::DestroyWalls() {
+	for (int i = 0; i < map.size(); i++) {
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(map[i]);
+	}
+	map.clear();
 }
