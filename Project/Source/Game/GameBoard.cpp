@@ -80,7 +80,6 @@ sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
 void GameBoard::EndGame(int playerIndex) {
 	gameOver = true;
 	losingPlayer = playerIndex;
-	
 }
 
 void GameBoard::CreateBackground() {
@@ -161,6 +160,7 @@ void GameBoard::PopulateWalls() {
 			wallGrid[i][j] = 0;
 		}
 	}
+
 	// create borders
 	for (int i = 0; i < numX; i++) {
 		if (i == 0 || i == numX - 1) {
@@ -246,11 +246,13 @@ void GameBoard::DestroyWalls() {
 Game::Scoreboard* GameBoard::CreateScoreBoard() {
 	Scoreboard* newScoreBoard = new Scoreboard;
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newScoreBoard);
+
 	newScoreBoard->SetPos(sf::Vector2f(320, 180));
 	newScoreBoard->SetSize(sf::Vector2f(1, 1));
 	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(newScoreBoard->AddComponent<GameEngine::SpriteRenderComponent>());
 	render->SetTexture(GameEngine::eTexture::Background);
 	render->SetFillColor(sf::Color::Transparent);
+
 	return newScoreBoard;
 }
 
@@ -260,6 +262,5 @@ void GameBoard::UpdateScoreBoard() {
 	}
 	else if (losingPlayer == 1) {//p1 dub
 		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
-
 	}
 }
