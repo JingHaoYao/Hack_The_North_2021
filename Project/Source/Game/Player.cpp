@@ -29,6 +29,7 @@ Player::Player(GameEngine::eTexture::type eTexture, int binding) {
     playerShootComponent->SetBinding(binding);
     playerNumber = binding;
     currentPlayerUpgrade = PlayerUpgrade::None;
+    crateDisplay = NULL;
 }
 
 Player::~Player() {
@@ -80,6 +81,7 @@ void Player::SetPlayerUpgrade(PlayerUpgrade u) {
         }
         CrateDisplay* newCrateDisplay = new CrateDisplay(u);
         crateDisplay = newCrateDisplay;
+        newCrateDisplay->SetPlayerIndex(playerNumber);
         GameEngine::GameEngineMain::GetInstance()->AddEntity(newCrateDisplay);
     }
     else {

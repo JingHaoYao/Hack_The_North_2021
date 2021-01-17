@@ -6,6 +6,7 @@
 #include "Game/Player.h"
 #include <vector>
 #include <iostream>
+#include "Game/PowerUpCrate.h"
 
 GameEngine::PowerUpCrateCollisionComponent::PowerUpCrateCollisionComponent() {
 	whatUpgrade = 0;
@@ -45,6 +46,9 @@ void GameEngine::PowerUpCrateCollisionComponent::Update() {
 					if (var == colComponent->GetEntity()) {
 						if (var->GetPlayerUpgrade() == Game::PlayerUpgrade::None) {
 							var->SetPlayerUpgrade(static_cast<Game::PlayerUpgrade>(whatUpgrade));
+							std::vector<Game::PowerUpCrate*> allCrates = Game::GameBoard::getInstance()->GetActiveCrates();
+							auto finder = std::find(allCrates.begin(), allCrates.end(), GetEntity());
+							Game::GameBoard::getInstance()->RemoveCrate(*finder);
 							GameEngine::GameEngineMain::GetInstance()->RemoveEntity(GetEntity());
 							break;
 						}

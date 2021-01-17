@@ -26,7 +26,8 @@ namespace Game
 		std::vector<Game::Player*> GetAllPlayers();
 		Wall* CreateWall(int, int);
 		std::vector<std::vector<int>> ProceduralWallGeneration(std::vector<std::vector<int>>);
-		std::vector<PowerUpCrate*> activeCrates;
+		void RemoveCrate(PowerUpCrate*);
+		std::vector<PowerUpCrate*> GetActiveCrates();
 
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY,losingPlayer;
@@ -43,6 +44,7 @@ namespace Game
 		sf::Vector2f ProjectileSpawnPosition();
 		PowerUpCrate* CreateUpgradeCrate(PlayerUpgrade, sf::Vector2f);
 		std::vector<Game::Player*> players;
+		std::vector<PowerUpCrate*> activeCrates;
 		static GameBoard* m_gameboard;
 		std::vector<std::vector<int>> wallGrid;
 		void PopulateWalls();

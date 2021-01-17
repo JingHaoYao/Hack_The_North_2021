@@ -341,6 +341,15 @@ void GameBoard::UpdateScoreBoard() {
 	}
 }
 
+void GameBoard::RemoveCrate(PowerUpCrate* crate) {
+	auto it = std::find(activeCrates.begin(), activeCrates.end(), crate);
+	activeCrates.erase(it);
+}
+
+std::vector<PowerUpCrate*> GameBoard::GetActiveCrates() {
+	return activeCrates;
+}
+
 void GameBoard::DestroyProjectiles(std::vector<Projectile*> projectiles) {
 	for (int i = 0; i < projectiles.size(); i++) {
 		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(projectiles[i]);
