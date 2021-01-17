@@ -134,32 +134,90 @@ std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 sf::Vector2f GameBoard::Player1SpawnPosition() {
 
 	srand(time(0));
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
 
-	// do wall checks
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
+
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}	
 
 	return sf::Vector2f(currentX, currentY);
 }
 
 sf::Vector2f GameBoard::Player2SpawnPosition() {
 
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
 
-	// do wall checks
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}
 
 	return sf::Vector2f(currentX, currentY);
 }
 
 sf::Vector2f GameBoard::ProjectileSpawnPosition() {
 	
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
 
-	// do wall checks
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}
 
 	return sf::Vector2f(currentX, currentY);
+}
+
+bool GameBoard::CheckAvailablePosition(int x, int y) {
+
+	// Hard-code bypass
+	return true;
+
+	int distance = 2;
+
+	for (int i = 0; i < 3; i++) {
+		if (wallGrid[x][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x][y - i] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y - i] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y - i] == 1) {
+			return false;
+		}
+	}
+	return true;
 }
 
 void GameBoard::PopulateWalls() {

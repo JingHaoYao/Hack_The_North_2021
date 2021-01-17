@@ -48,6 +48,7 @@ namespace Game
 		void DestroyWalls();
 		void UpdateScoreBoard();
 		void DestroyProjectiles(std::vector<Projectile*>);
+		bool CheckAvailablePosition(int, int);
 
 	};
 }
