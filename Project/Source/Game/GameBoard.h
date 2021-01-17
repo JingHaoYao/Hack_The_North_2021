@@ -16,9 +16,8 @@ namespace Game
 	public:
 		GameBoard();
 		virtual ~GameBoard();
-
 		void Update();		
-		bool IsGameOver();
+		void EndGame();
 		Player* GetPlayerByIndex(int);
 		sf::Vector2f GetPlayerSpawnPosition(int);
 		static GameBoard* getInstance() { if (!m_gameboard) m_gameboard = new GameBoard(); return m_gameboard; }
@@ -28,15 +27,21 @@ namespace Game
 
 	protected:
 		int widthPx, heightPx,numX,numY,remainderX,remainderY;
+		float projectileSpawnTimer, projectileTimeElapsed;
+		bool gameOver;
+		std::vector<Wall*> map;
 		void CreateBackground();
 		void CreatePlayer();
 		sf::Vector2f Player1SpawnPosition();
 		sf::Vector2f Player2SpawnPosition();
+		sf::Vector2f ProjectileSpawnPosition();
 		void CreateUpgradeCrate(PlayerUpgrade, sf::Vector2f);
 		std::vector<Game::Player*> players;
 		static GameBoard* m_gameboard;
 		std::vector<std::vector<int>> wallGrid;
-		void populateWalls();
+		void PopulateWalls();
+		void DestroyWalls();
+
 	};
 }
 
