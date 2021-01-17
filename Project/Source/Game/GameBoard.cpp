@@ -340,3 +340,16 @@ void GameBoard::UpdateScoreBoard() {
 		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
 	}
 }
+
+void GameBoard::DestroyProjectiles(std::vector<Projectile*> projectiles) {
+	for (int i = 0; i < projectiles.size(); i++) {
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(projectiles[i]);
+	}
+
+	for each (auto player in GetAllPlayers()) {
+		player->ClearPlayerProjectiles();
+		player->SetPlayerUpgrade(Game::None);
+	}
+
+	projectiles.clear();
+}
