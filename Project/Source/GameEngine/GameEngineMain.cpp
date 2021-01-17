@@ -84,7 +84,7 @@ void GameEngineMain::RemoveEntity(Entity* entity)
 		found = std::find(m_entitiesToRemove.begin(), m_entitiesToRemove.end(), entity);
 		assert(found != m_entitiesToRemove.end()); //Drop an assert if we remove a non existing entity (neither on entity list and on entity to remove list);
 	}
-
+	
 	if (found != m_entities.end())
 	{
 		m_entitiesToRemove.push_back(entity);

@@ -93,6 +93,7 @@ void GameBoard::CreateBackground() {
 	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(background->AddComponent<GameEngine::SpriteRenderComponent>());
 	render->SetTexture(GameEngine::eTexture::Background);
 	render->SetFillColor(sf::Color::Transparent);
+	render->SetZLevel(-2);
 }
 
 void GameBoard::CreatePlayer() 
@@ -245,8 +246,8 @@ void GameBoard::DestroyWalls() {
 Game::Scoreboard* GameBoard::CreateScoreBoard() {
 	Scoreboard* newScoreBoard = new Scoreboard;
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newScoreBoard);
-	newScoreBoard->SetPos(sf::Vector2f(640, 360));
-	newScoreBoard->SetSize(sf::Vector2f(640, 360));
+	newScoreBoard->SetPos(sf::Vector2f(320, 180));
+	newScoreBoard->SetSize(sf::Vector2f(1, 1));
 	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(newScoreBoard->AddComponent<GameEngine::SpriteRenderComponent>());
 	render->SetTexture(GameEngine::eTexture::Background);
 	render->SetFillColor(sf::Color::Transparent);

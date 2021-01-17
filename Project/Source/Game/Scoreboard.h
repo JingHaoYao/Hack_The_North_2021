@@ -20,8 +20,6 @@ namespace Game {
 		void setp2Score(int);
 		void setRound(int);
 
-
-
 	protected:
 		int p1Score;
 		int p2Score;
@@ -31,6 +29,7 @@ namespace Game {
 		std::string roundString;
 		std::string scoreboardString;
 		GameEngine::TextRenderComponent* textRenderComponent;
+		void UpdateScoreboard();
 
 	};
 }
