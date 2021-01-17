@@ -24,6 +24,7 @@ GameBoard::GameBoard()
 	losingPlayer = -1;
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
+	activeProjectiles;
 	map;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
@@ -58,6 +59,14 @@ void GameBoard::Update()
 	if (gameOver) {
 		gameOver = false;
 		DestroyWalls();
+		std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
+		for (int i = 0; i < currentPlayers.size(); i++) {
+			playerProjectiles = currentPlayers[i]->GetCurrentProjectiles();
+			for (int j = 0; j < playerProjectiles.size(); j++) {
+				activeProjectiles.push_back(playerProjectiles[j]);
+			}
+		}
+		DestroyProjectiles(activeProjectiles);
 		PopulateWalls();
 		UpdateScoreBoard();
 	}
@@ -263,4 +272,11 @@ void GameBoard::UpdateScoreBoard() {
 	else if (losingPlayer == 1) {//p1 dub
 		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
 	}
+}
+
+void GameBoard::DestroyProjectiles(std::vector<Projectile*> projectiles) {
+	for (int i = 0; i < projectiles.size(); i++) {
+		delete projectiles[i];
+	}
+	projectiles.clear();
 }

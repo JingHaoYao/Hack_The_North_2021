@@ -1,6 +1,15 @@
 #pragma once
 #include "GameEngine/EntitySystem/Component.h"
 #include <map>
+#include "Game/GameBoard.h"
+#include "Game/Projectile.h"
+#include "Game/LaserProjectile.h"
+#include "Game/BouncingBomb.h"
+#include "GameEngine/GameEngineMain.h"
+#include <SFML/Window/Keyboard.hpp>
+#include <GameEngine\Util\TextureManager.h>
+#include <cmath>
+#include "Game/Player.h"
 
 namespace GameEngine
 {

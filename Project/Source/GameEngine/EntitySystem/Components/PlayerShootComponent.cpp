@@ -1,14 +1,5 @@
 #define _USE_MATH_DEFINES
 #include "PlayerShootComponent.h"
-#include "Game/GameBoard.h"
-#include "Game/Projectile.h"
-#include "Game/LaserProjectile.h"
-#include "Game/BouncingBomb.h"
-#include "GameEngine/GameEngineMain.h"
-#include <SFML/Window/Keyboard.hpp>
-#include <GameEngine\Util\TextureManager.h>
-#include <cmath>
-#include "Game/Player.h"
 
 using namespace Game;
 using namespace GameEngine;
@@ -114,6 +105,7 @@ void PlayerShootComponent::CreateProjectile() {
             playerInstance->SetPlayerUpgrade(PlayerUpgrade::None);
             break;
         }
+        return newProjectile;
 }
 
 void PlayerShootComponent::SetPlayerIndex(int i) {
