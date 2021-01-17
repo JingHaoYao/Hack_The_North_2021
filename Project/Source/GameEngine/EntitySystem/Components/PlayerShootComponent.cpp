@@ -187,3 +187,4 @@ int PlayerShootComponent::GetPlayerIndex() {
 void PlayerShootComponent::SetBinding(int binding) {
     keyBinding = binding;
 }
+
