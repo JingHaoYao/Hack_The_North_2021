@@ -61,11 +61,9 @@ void Player::PlayerDied() {
 
     GameBoard::getInstance()->EndGame();
     std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
-    /*for (int i = 0; i < currentPlayers.size(); i++) {
-        SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(i));
-    }*/
-    SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(0));
-    SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(1));
+    for (int i = 0; i < currentPlayers.size(); i++) {
+        currentPlayers[i]->SetPos(Game::GameBoard::getInstance()->GetPlayerSpawnPosition(i));
+    }
 }
 
 void Player::SetPlayerUpgrade(PlayerUpgrade u) {

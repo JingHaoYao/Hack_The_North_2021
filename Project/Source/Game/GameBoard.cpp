@@ -26,7 +26,6 @@ GameBoard::GameBoard()
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
-	CreateUpgradeCrate(PlayerUpgrade::Bomb, sf::Vector2f(200.f, 200.f));
 	PopulateWalls();
 }
 
@@ -39,7 +38,17 @@ void GameBoard::Update()
 {	
 	if (projectileTimeElapsed >= projectileSpawnTimer) {
 		projectileTimeElapsed = 0.f;
-		CreateUpgradeCrate(PlayerUpgrade::Laser, ProjectileSpawnPosition());
+
+		int whichPowerUp = rand() % 2 + 1;
+
+		switch (whichPowerUp) {
+		case 1:
+			CreateUpgradeCrate(PlayerUpgrade::Laser, ProjectileSpawnPosition());
+			break;
+		case 2:
+			CreateUpgradeCrate(PlayerUpgrade::Bomb, ProjectileSpawnPosition());
+			break;
+		}
 	}
 	else {
 		projectileTimeElapsed += GameEngine::GameEngineMain::GetTimeDelta();
