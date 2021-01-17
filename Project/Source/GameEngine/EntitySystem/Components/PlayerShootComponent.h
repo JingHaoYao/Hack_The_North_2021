@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngine/EntitySystem/Component.h"
+#include <map>
 
 namespace GameEngine
 {
@@ -19,6 +20,7 @@ namespace GameEngine
         float projectileSpeed;
         float shaftLength;
         int playerIndex;
+        std::map<int, int> playerPressDict;
 
         void CreateProjectile();
     };

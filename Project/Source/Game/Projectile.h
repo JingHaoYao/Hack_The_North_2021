@@ -24,6 +24,7 @@ namespace Game {
         void FlagPlayerHitbox();
         int GetPlayerIndex();
         void SetPlayerIndex(int);
+        virtual void ReClickAction();
 
     protected:
         float projectileSpeed;

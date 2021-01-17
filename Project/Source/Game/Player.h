@@ -15,6 +15,7 @@ namespace Game {
         Bomb = 2,
         Laser = 3,
         MachineGun = 4,
+        Bomb_State_2 = 5,
         Count
     };
 

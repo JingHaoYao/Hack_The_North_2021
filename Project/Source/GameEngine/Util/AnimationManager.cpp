@@ -35,7 +35,17 @@ void AnimationManager::InitStaticGameAnimations()
 			EAnimationId::Bomb_Blink,
 			eTexture::Bomb_Blink,
 			sf::Vector2i(0, 0),
-			6,
+			4,
+			12)
+	);
+
+	m_animDefinitions.push_back
+	(
+		SAnimationDefinition(
+			EAnimationId::Explosion_1,
+			eTexture::Explosion_1,
+			sf::Vector2i(0, 0),
+			8,
 			12)
 	);
 }

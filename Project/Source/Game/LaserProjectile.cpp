@@ -4,7 +4,7 @@ Game::LaserProjectile::LaserProjectile() {
 
     // Render
     spriteRenderComponent->SetTexture(GameEngine::eTexture::Laser_Projectile);
-	SetSize(sf::Vector2f(15, 15));
+	SetSize(sf::Vector2f(10, 10));
 }
 
 Game::LaserProjectile::~LaserProjectile() {

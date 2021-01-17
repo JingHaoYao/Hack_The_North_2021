@@ -24,7 +24,7 @@ GameBoard::GameBoard()
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
 	populateWalls();
-	CreateUpgradeCrate(PlayerUpgrade::Laser, sf::Vector2f(200.f, 200.f));
+	CreateUpgradeCrate(PlayerUpgrade::Bomb, sf::Vector2f(200.f, 200.f));
 }
 GameBoard::~GameBoard()
 {

@@ -19,7 +19,7 @@ Projectile::Projectile() {
     spriteRenderComponent = AddComponent<GameEngine::SpriteRenderComponent>();
     spriteRenderComponent->SetTexture(GameEngine::eTexture::Basic_Projectile);
     spriteRenderComponent->SetFillColor(sf::Color(1, 1, 1, 0));
-    SetSize(sf::Vector2f(20, 20));
+    SetSize(sf::Vector2f(10, 10));
 
     // Collisions
     collidableComponent = AddComponent<GameEngine::PlayerProjectileCollisionComponent>();
@@ -31,6 +31,10 @@ Projectile::Projectile() {
 }
 
 Projectile::~Projectile() {
+
+}
+
+void Projectile::ReClickAction() {
 
 }
 

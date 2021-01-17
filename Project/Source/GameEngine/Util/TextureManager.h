@@ -28,6 +28,7 @@ namespace GameEngine
 			Laser_Projectile = 14,
 			Background = 15,
 			Bomb_Blink = 16,
+			Explosion_1 = 17,
 			Count,
 		};
 	}	
@@ -52,6 +53,7 @@ namespace GameEngine
 			case eTexture::Laser_Projectile: return "laser_projectile.png";
 			case eTexture::Background: return "Background.png";
 			case eTexture::Bomb_Blink: return "bomb_blink.png";
+			case eTexture::Explosion_1: return "explosion_1.png";
 		}
 		return "UnknownTexType";
 	}

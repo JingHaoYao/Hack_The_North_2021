@@ -6,6 +6,7 @@
 namespace GameEngine
 {
 	enum CollisionLayer {
+		None,
 		Player,
 		PlayerProjectile,
 		Wall,
