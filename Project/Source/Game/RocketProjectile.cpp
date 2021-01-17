@@ -15,7 +15,7 @@ Game::RocketProjectile::RocketProjectile() {
 	collidableComponent->SetCollideWithWall(false);
 	m_layer = GameEngine::CollisionLayer::PlayerProjectile;
 	SetSize(sf::Vector2f(25, 45));
-	projectileSpeed = 200;
+	projectileSpeed = 500;
 	duration = 3.f;
 }
 

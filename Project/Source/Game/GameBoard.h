@@ -32,7 +32,6 @@ namespace Game
 		bool gameOver;
 		std::vector<Wall*> map;
 		std::vector<Projectile*> playerProjectiles;
-		std::vector<Projectile*> activeProjectiles;
 		Game::Scoreboard* currentScoreBoard;
 		void CreateBackground();
 		Game::Scoreboard* CreateScoreBoard();

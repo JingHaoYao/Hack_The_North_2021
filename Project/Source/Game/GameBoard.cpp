@@ -24,13 +24,11 @@ GameBoard::GameBoard()
 	losingPlayer = -1;
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
-	activeProjectiles;
 	map;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
 	PopulateWalls();
-	CreateUpgradeCrate(PlayerUpgrade::Rocket, players[0]->GetPos());
 }
 
 GameBoard::~GameBoard()
@@ -67,6 +65,8 @@ void GameBoard::Update()
 		gameOver = false;
 		DestroyWalls();
 		std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
+
+		std::vector<Projectile*> activeProjectiles;
 		for (int i = 0; i < currentPlayers.size(); i++) {
 			playerProjectiles = currentPlayers[i]->GetCurrentProjectiles();
 			for (int j = 0; j < playerProjectiles.size(); j++) {
