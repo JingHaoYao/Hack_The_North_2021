@@ -15,10 +15,12 @@ namespace GameEngine {
 		bool HasLeftPlayerHitBox();
 		void FlagLeftPlayerHitBox();
 		void SetCurrentAngleTravel(float);
+		void SetCollideWithWall(bool);
 		float GetCurrentAngleTravel();
 
 	protected:
 		bool leftPlayerHitbox;
 		float currentAngleTravel;
+		bool collideWithWall;
 	};
 }

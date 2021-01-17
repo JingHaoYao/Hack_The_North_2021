@@ -9,6 +9,7 @@ using namespace GameEngine;
 PlayerProjectileCollisionComponent::PlayerProjectileCollisionComponent() {
 	leftPlayerHitbox = false;
 	currentAngleTravel = 0;
+	collideWithWall = true;
 }
 
 PlayerProjectileCollisionComponent::~PlayerProjectileCollisionComponent() {
@@ -47,7 +48,7 @@ void PlayerProjectileCollisionComponent::Update()
 		{
 			intersectedComponents.push_back(colComponent);
 
-			if (colComponent->GetEntity()->GetLayer() == CollisionLayer::Wall) {
+			if (colComponent->GetEntity()->GetLayer() == CollisionLayer::Wall && collideWithWall) {
 				// need to find which side of the wall it crashes with.
 				sf::Vector2f pos = GetEntity()->GetPos();
 				float boundedAngle = fmod(currentAngleTravel + 360, 360);
@@ -91,4 +92,8 @@ void PlayerProjectileCollisionComponent::SetCurrentAngleTravel(float angleTravel
 
 float PlayerProjectileCollisionComponent::GetCurrentAngleTravel() {
 	return currentAngleTravel;
+}
+
+void PlayerProjectileCollisionComponent::SetCollideWithWall(bool collide) {
+	collideWithWall = collide;
 }

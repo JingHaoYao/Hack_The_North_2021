@@ -9,6 +9,7 @@ Game::DamagingExplosion::DamagingExplosion() {
 	animator->SetShouldDestroy(true);
 	collider = AddComponent<GameEngine::PlayerProjectileCollisionComponent>();
 	collider->FlagLeftPlayerHitBox();
+	collider->SetCollideWithWall(false);
 	SetSize(sf::Vector2f(100.f, 100.f));
 	m_layer = GameEngine::CollisionLayer::PlayerProjectile;
 }

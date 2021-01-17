@@ -51,9 +51,11 @@ namespace TextureHelper
 		case GameEngine::eTexture::Explosion_0:
 			return sf::Vector2f(48.f, 48.f);
 		case GameEngine::eTexture::Bomb_Blink:
-			return sf::Vector2f(50.f, 50.f);
+			return sf::Vector2f(18.f, 18.f);
 		case GameEngine::eTexture::Explosion_1:
 			return sf::Vector2f(32.f, 32.f);
+		case GameEngine::eTexture::Rocket_Blink:
+			return sf::Vector2f(25.f, 45.f);
 		}
 
 		return sf::Vector2f(-1.f, -1.f);

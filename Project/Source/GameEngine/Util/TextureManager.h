@@ -29,6 +29,7 @@ namespace GameEngine
 			Background = 15,
 			Bomb_Blink = 16,
 			Explosion_1 = 17,
+			Rocket_Blink = 18,
 			Count,
 		};
 	}	
@@ -54,6 +55,7 @@ namespace GameEngine
 			case eTexture::Background: return "Background.png";
 			case eTexture::Bomb_Blink: return "bomb_blink.png";
 			case eTexture::Explosion_1: return "explosion_1.png";
+			case eTexture::Rocket_Blink: return "rocket_blink.png";
 		}
 		return "UnknownTexType";
 	}

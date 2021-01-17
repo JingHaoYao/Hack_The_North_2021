@@ -22,6 +22,11 @@ namespace GameEngine
         int playerIndex;
         std::map<int, int> playerPressDict;
 
+        float currentMachineGunTimer;
+        float currentMachineGunThreshold;
+        float fireGunTimer;
+
+
         void CreateProjectile();
     };
 }

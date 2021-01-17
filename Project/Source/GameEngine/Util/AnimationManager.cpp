@@ -48,6 +48,16 @@ void AnimationManager::InitStaticGameAnimations()
 			8,
 			12)
 	);
+
+	m_animDefinitions.push_back
+	(
+		SAnimationDefinition(
+			EAnimationId::Rocket_Blink,
+			eTexture::Rocket_Blink,
+			sf::Vector2i(0, 0),
+			4,
+			12)
+	);
 }
 
 

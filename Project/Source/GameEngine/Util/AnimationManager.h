@@ -16,6 +16,7 @@ namespace GameEngine
 			Laser_Projectile = 2,
 			Bomb_Blink = 3,
 			Explosion_1 = 4,
+			Rocket_Blink = 5,
 			Count
 		};
 	}
