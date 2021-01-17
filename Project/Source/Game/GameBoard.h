@@ -45,6 +45,7 @@ namespace Game
 		void PopulateWalls();
 		void DestroyWalls();
 		void UpdateScoreBoard();
+		bool CheckAvailablePosition(int, int);
 
 	};
 }
