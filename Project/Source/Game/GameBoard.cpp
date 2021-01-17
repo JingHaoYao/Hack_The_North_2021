@@ -24,6 +24,7 @@ GameBoard::GameBoard()
 	losingPlayer = -1;
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
+	activeProjectiles;
 	map;
 	activeCrates;
 	for (int i = 0; i < numX; i++) {
@@ -59,7 +60,6 @@ void GameBoard::Update()
 	if (gameOver) {
 		gameOver = false;
 		DestroyWalls();
-		RemoveCrates();
 		PopulateWalls();
 		UpdateScoreBoard();
 		
@@ -325,12 +325,4 @@ void GameBoard::UpdateScoreBoard() {
 	else if (losingPlayer == 1) {//p1 dub
 		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
 	}
-}
-
-void GameBoard::RemoveCrates() {
-	for (int i = 0; i < activeCrates.size(); i++) {
-		PowerUpCrate* gayCrate = activeCrates[i];
-		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(gayCrate);
-	}
-	
 }

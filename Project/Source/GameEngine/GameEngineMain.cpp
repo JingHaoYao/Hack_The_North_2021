@@ -87,8 +87,10 @@ void GameEngineMain::RemoveEntity(Entity* entity)
 	
 	if (found != m_entities.end())
 	{
-		m_entitiesToRemove.push_back(entity);
-		entity->OnRemoveFromWorld();
+		if (std::count(m_entitiesToRemove.begin(), m_entitiesToRemove.end(), *found) == 0) {
+			m_entitiesToRemove.push_back(entity);
+			entity->OnRemoveFromWorld();
+		}
 	}
 }
 

@@ -32,6 +32,8 @@ namespace Game
 		float projectileSpawnTimer, projectileTimeElapsed;
 		bool gameOver;
 		std::vector<Wall*> map;
+		std::vector<Projectile*> playerProjectiles;
+		std::vector<Projectile*> activeProjectiles;
 		Game::Scoreboard* currentScoreBoard;
 		void CreateBackground();
 		Game::Scoreboard* CreateScoreBoard();
@@ -46,6 +48,7 @@ namespace Game
 		void PopulateWalls();
 		void DestroyWalls();
 		void UpdateScoreBoard();
+		void DestroyProjectiles(std::vector<Projectile*>);
 		bool CheckAvailablePosition(int, int);
 		void RemoveCrates();
 
