@@ -22,7 +22,7 @@ GameBoard::GameBoard()
 	remainderX = (widthPx) % (numX * 16);
 	remainderY = (heightPx) % (numY * 16);
 	losingPlayer = -1;
-	projectileSpawnTimer = 15.f;
+	projectileSpawnTimer = 10.f;
 	projectileTimeElapsed = 0.f;
 	map;
 	activeCrates;
@@ -52,10 +52,10 @@ void GameBoard::Update()
 			activeCrates.push_back(CreateUpgradeCrate(PlayerUpgrade::Bomb, ProjectileSpawnPosition()));
 			break;
 		case 3:
-			CreateUpgradeCrate(PlayerUpgrade::MachineGun, ProjectileSpawnPosition());
+			activeCrates.push_back(CreateUpgradeCrate(PlayerUpgrade::MachineGun, ProjectileSpawnPosition()));
 			break;
 		case 4:
-			CreateUpgradeCrate(PlayerUpgrade::Rocket, ProjectileSpawnPosition());
+			activeCrates.push_back(CreateUpgradeCrate(PlayerUpgrade::Rocket, ProjectileSpawnPosition()));
 			break;
 		}
 	}
@@ -66,7 +66,7 @@ void GameBoard::Update()
 		gameOver = false;
 		DestroyWalls();
 		std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
-
+		RemoveCrates();
 		std::vector<Projectile*> activeProjectiles;
 		for (int i = 0; i < currentPlayers.size(); i++) {
 			playerProjectiles = currentPlayers[i]->GetCurrentProjectiles();
@@ -352,4 +352,11 @@ void GameBoard::DestroyProjectiles(std::vector<Projectile*> projectiles) {
 	}
 
 	projectiles.clear();
+}
+
+void GameBoard::RemoveCrates() {
+	for (int i = 0; i < activeCrates.size(); i++) {
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(activeCrates[i]);
+	}
+	activeCrates.clear();
 }
