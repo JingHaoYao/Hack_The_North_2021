@@ -7,6 +7,7 @@
 #include "GameEngine/EntitySystem/Components/PlayerShootComponent.h"
 #include "GameEngine/Util/TextureManager.h"
 #include "Game/Projectile.h"
+#include "CrateDisplay.h"
 
 namespace Game {
     enum PlayerUpgrade {
@@ -34,6 +35,7 @@ namespace Game {
         void PlayerDied(); //pepesad
         void SetPlayerUpgrade(PlayerUpgrade);
         PlayerUpgrade GetPlayerUpgrade();
+        CrateDisplay* crateDisplay;
 
     protected:
         GameEngine::SpriteRenderComponent* spriteRenderComponent;
@@ -44,6 +46,7 @@ namespace Game {
         std::vector<Projectile*> currentProjectiles;
         PlayerUpgrade currentPlayerUpgrade;
         int playerNumber;
+
 
         void Update();
     };

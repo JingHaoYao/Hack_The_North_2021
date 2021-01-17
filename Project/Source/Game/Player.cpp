@@ -73,6 +73,21 @@ void Player::PlayerDied() {
 
 void Player::SetPlayerUpgrade(PlayerUpgrade u) {
     currentPlayerUpgrade = u;
+    if (u != PlayerUpgrade::None) {
+        if (crateDisplay != NULL) {
+            GameEngine::GameEngineMain::GetInstance()->RemoveEntity(crateDisplay);
+            crateDisplay = NULL;
+        }
+        CrateDisplay* newCrateDisplay = new CrateDisplay(u);
+        crateDisplay = newCrateDisplay;
+        GameEngine::GameEngineMain::GetInstance()->AddEntity(newCrateDisplay);
+    }
+    else {
+        if (crateDisplay != NULL) {
+            GameEngine::GameEngineMain::GetInstance()->RemoveEntity(crateDisplay);
+            crateDisplay = NULL;
+        }
+    }
 }
 
 PlayerUpgrade Player::GetPlayerUpgrade() {
