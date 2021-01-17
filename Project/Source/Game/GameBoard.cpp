@@ -25,6 +25,7 @@ GameBoard::GameBoard()
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
 	map;
+	activeCrates;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
 	}
@@ -45,10 +46,10 @@ void GameBoard::Update()
 
 		switch (whichPowerUp) {
 		case 1:
-			CreateUpgradeCrate(PlayerUpgrade::Laser, ProjectileSpawnPosition());
+			activeCrates.push_back(CreateUpgradeCrate(PlayerUpgrade::Laser, ProjectileSpawnPosition())); 
 			break;
 		case 2:
-			CreateUpgradeCrate(PlayerUpgrade::Bomb, ProjectileSpawnPosition());
+			activeCrates.push_back(CreateUpgradeCrate(PlayerUpgrade::Bomb, ProjectileSpawnPosition()));
 			break;
 		}
 	}
@@ -58,14 +59,17 @@ void GameBoard::Update()
 	if (gameOver) {
 		gameOver = false;
 		DestroyWalls();
+		RemoveCrates();
 		PopulateWalls();
 		UpdateScoreBoard();
+		
 	}
 }
 
-void GameBoard::CreateUpgradeCrate(PlayerUpgrade u, sf::Vector2f p) {
+PowerUpCrate* GameBoard::CreateUpgradeCrate(PlayerUpgrade u, sf::Vector2f p) {
 	PowerUpCrate* newCrate = new PowerUpCrate(u, p);
 	GameEngine::GameEngineMain::GetInstance()->AddEntity(newCrate);
+	return newCrate;
 }
 
 sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
@@ -321,4 +325,12 @@ void GameBoard::UpdateScoreBoard() {
 	else if (losingPlayer == 1) {//p1 dub
 		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
 	}
+}
+
+void GameBoard::RemoveCrates() {
+	for (int i = 0; i < activeCrates.size(); i++) {
+		PowerUpCrate* gayCrate = activeCrates[i];
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(gayCrate);
+	}
+	
 }
