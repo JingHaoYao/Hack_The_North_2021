@@ -5,6 +5,7 @@
 #include "Game/Player.h"
 #include "Game/Wall.h"
 #include "Game/Scoreboard.h"
+#include "PowerUpCrate.h"
 
 namespace Game
 {
