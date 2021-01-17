@@ -30,6 +30,7 @@ namespace Game {
         std::vector<Projectile*> GetCurrentProjectiles();
         void AddCurrentProjectile(Projectile*);
         void RemoveProjectile(Projectile*);
+        void ClearPlayerProjectiles();
         void PlayerDied(); //pepesad
         void SetPlayerUpgrade(PlayerUpgrade);
         PlayerUpgrade GetPlayerUpgrade();

@@ -13,6 +13,7 @@ GameBoard* GameBoard::m_gameboard = nullptr;
 GameBoard::GameBoard()
 {
 	CreateBackground();
+	currentScoreBoard = CreateScoreBoard();
 	CreatePlayer();
 	widthPx = GameEngine::GameEngineMain::GetWinWidth();
 	heightPx = GameEngine::GameEngineMain::GetWinHeight();
@@ -20,8 +21,10 @@ GameBoard::GameBoard()
 	numY = (heightPx-20) / 16;
 	remainderX = (widthPx) % (numX * 16);
 	remainderY = (heightPx) % (numY * 16);
+	losingPlayer = -1;
 	projectileSpawnTimer = 15.f;
 	projectileTimeElapsed = 0.f;
+	activeProjectiles;
 	map;
 	for (int i = 0; i < numX; i++) {
 		wallGrid.push_back(std::vector<int>(numY, 0));
@@ -63,7 +66,16 @@ void GameBoard::Update()
 	if (gameOver) {
 		gameOver = false;
 		DestroyWalls();
+		std::vector<Game::Player*> currentPlayers = GameBoard::getInstance()->GetAllPlayers();
+		for (int i = 0; i < currentPlayers.size(); i++) {
+			playerProjectiles = currentPlayers[i]->GetCurrentProjectiles();
+			for (int j = 0; j < playerProjectiles.size(); j++) {
+				activeProjectiles.push_back(playerProjectiles[j]);
+			}
+		}
+		DestroyProjectiles(activeProjectiles);
 		PopulateWalls();
+		UpdateScoreBoard();
 	}
 }
 
@@ -81,8 +93,9 @@ sf::Vector2f GameBoard::GetPlayerSpawnPosition(int i) {
 	}
 }
 
-void GameBoard::EndGame() {
+void GameBoard::EndGame(int playerIndex) {
 	gameOver = true;
+	losingPlayer = playerIndex;
 }
 
 void GameBoard::CreateBackground() {
@@ -95,6 +108,7 @@ void GameBoard::CreateBackground() {
 	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(background->AddComponent<GameEngine::SpriteRenderComponent>());
 	render->SetTexture(GameEngine::eTexture::Background);
 	render->SetFillColor(sf::Color::Transparent);
+	render->SetZLevel(-2);
 }
 
 void GameBoard::CreatePlayer() 
@@ -127,32 +141,90 @@ std::vector<Game::Player*> GameBoard::GetAllPlayers() {
 sf::Vector2f GameBoard::Player1SpawnPosition() {
 
 	srand(time(0));
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
 
-	// do wall checks
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
+
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}	
 
 	return sf::Vector2f(currentX, currentY);
 }
 
 sf::Vector2f GameBoard::Player2SpawnPosition() {
 
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
 
-	// do wall checks
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}
 
 	return sf::Vector2f(currentX, currentY);
 }
 
 sf::Vector2f GameBoard::ProjectileSpawnPosition() {
 	
-	float currentX = rand() % (1280 - 120) + 60;
-	float currentY = rand() % (720 - 120) + 60;
+	bool positionFound = false;
+	float currentX = 0;
+	float currentY = 0;
 
-	// do wall checks
+	while (!positionFound) {
+		currentX = rand() % (1280 - 120) + 60;
+		currentY = rand() % (720 - 120) + 60;
+
+		positionFound = GameBoard::CheckAvailablePosition(currentX / 16, currentY / 16);
+	}
 
 	return sf::Vector2f(currentX, currentY);
+}
+
+bool GameBoard::CheckAvailablePosition(int x, int y) {
+
+	// Hard-code bypass
+	return true;
+
+	int distance = 2;
+
+	for (int i = 0; i < 3; i++) {
+		if (wallGrid[x][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y] == 1) {
+			return false;
+		}
+		if (wallGrid[x][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x][y - i] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x + i][y - i] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y + i] == 1) {
+			return false;
+		}
+		if (wallGrid[x - i][y - i] == 1) {
+			return false;
+		}
+	}
+	return true;
 }
 
 void GameBoard::PopulateWalls() {
@@ -162,6 +234,7 @@ void GameBoard::PopulateWalls() {
 			wallGrid[i][j] = 0;
 		}
 	}
+
 	// create borders
 	for (int i = 0; i < numX; i++) {
 		if (i == 0 || i == numX - 1) {
@@ -243,4 +316,38 @@ void GameBoard::DestroyWalls() {
 		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(map[i]);
 	}
 	map.clear();
+}
+Game::Scoreboard* GameBoard::CreateScoreBoard() {
+	Scoreboard* newScoreBoard = new Scoreboard;
+	GameEngine::GameEngineMain::GetInstance()->AddEntity(newScoreBoard);
+
+	newScoreBoard->SetPos(sf::Vector2f(320, 180));
+	newScoreBoard->SetSize(sf::Vector2f(1, 1));
+	GameEngine::SpriteRenderComponent* render = static_cast<GameEngine::SpriteRenderComponent*>(newScoreBoard->AddComponent<GameEngine::SpriteRenderComponent>());
+	render->SetTexture(GameEngine::eTexture::Background);
+	render->SetFillColor(sf::Color::Transparent);
+
+	return newScoreBoard;
+}
+
+void GameBoard::UpdateScoreBoard() {
+	if (losingPlayer == 0) { // p2 dub
+		currentScoreBoard->setp2Score(currentScoreBoard->getp2Score() + 1);
+	}
+	else if (losingPlayer == 1) {//p1 dub
+		currentScoreBoard->setp1Score(currentScoreBoard->getp1Score() + 1);
+	}
+}
+
+void GameBoard::DestroyProjectiles(std::vector<Projectile*> projectiles) {
+	for (int i = 0; i < projectiles.size(); i++) {
+		GameEngine::GameEngineMain::GetInstance()->RemoveEntity(projectiles[i]);
+	}
+
+	for each (auto player in GetAllPlayers()) {
+		player->ClearPlayerProjectiles();
+		player->SetPlayerUpgrade(Game::None);
+	}
+
+	projectiles.clear();
 }
